@@ -15,10 +15,6 @@ class ProfileController extends AbstractController
      */
     public function index(): Response
     {
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('main_homepage');
-        }
         return $this->render('main/profile/index.html.twig');
     }
 
