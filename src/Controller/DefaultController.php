@@ -60,7 +60,6 @@ class DefaultController extends AbstractController
         }
 
         $form = $this->createForm(EditProductFormType::class, $product);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
