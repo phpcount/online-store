@@ -27,51 +27,51 @@ class DefaultController extends AbstractController
         return $this->render('main/default/index.html.twig', []);
     }
 
-    /**
-     * for test
-     * @Route("/product-add", methods="GET", name="product_add_old")
-     */
-    public function productAdd(): Response
-    {
-        $product = new Product();
-        $product->setTitle('Product. ' . rand(1, 100))
-            ->setDescription('something')
-            ->setPrice(rand(10, 100))
-            ->setQuantity(1);
+    // /**
+    //  * for test
+    //  * @Route("/product-add", methods="GET", name="product_add_old")
+    //  */
+    // public function productAdd(): Response
+    // {
+    //     $product = new Product();
+    //     $product->setTitle('Product. ' . rand(1, 100))
+    //         ->setDescription('something')
+    //         ->setPrice(rand(10, 100))
+    //         ->setQuantity(1);
 
-        $this->getEm()->persist($product);
-        $this->getEm()->flush();
+    //     $this->getEm()->persist($product);
+    //     $this->getEm()->flush();
 
-        // return $this->render('main/default/index.html.twig', $product);
-        return $this->redirectToRoute('homepage');
-    }
+    //     // return $this->render('main/default/index.html.twig', $product);
+    //     return $this->redirectToRoute('homepage');
+    // }
 
-    /**
-     * @Route("/edit-product/{id}", methods="GET|POST", name="product_edit", requirements={"id"="\d+"})
-     * @Route("/add-product", methods="GET|POST", name="product_add")
-     */
-    public function editProduct(Request $request, int $id = null): Response
-    {
-        if ($id) {
-           $product = $this->getEm()->getRepository(Product::class)->find($id);
-        } else {
-            // throw new \LogicException('ID needed');
-            $product = new Product();
-        }
+    // /**
+    //  * @Route("/edit-product/{id}", methods="GET|POST", name="product_edit", requirements={"id"="\d+"})
+    //  * @Route("/add-product", methods="GET|POST", name="product_add")
+    //  */
+    // public function editProduct(Request $request, int $id = null): Response
+    // {
+    //     if ($id) {
+    //        $product = $this->getEm()->getRepository(Product::class)->find($id);
+    //     } else {
+    //         // throw new \LogicException('ID needed');
+    //         $product = new Product();
+    //     }
 
-        $form = $this->createForm(EditProductFormType::class, $product);
-        $form->handleRequest($request);
+    //     $form = $this->createForm(EditProductFormType::class, $product);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getEm()->persist($product);
-            $this->getEm()->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $this->getEm()->persist($product);
+    //         $this->getEm()->flush();
 
-            return $this->redirectToRoute('product_edit', [ 'id' => $product->getId() ]);
-        }
+    //         return $this->redirectToRoute('product_edit', [ 'id' => $product->getId() ]);
+    //     }
     
-        // dd($product, $form);
-        return $this->render('main/default/edit_product.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
+    //     // dd($product, $form);
+    //     return $this->render('main/default/edit_product.html.twig', [
+    //         'form' => $form->createView()
+    //     ]);
+    // }
 }

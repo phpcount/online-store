@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-between align-items-center">
+    <div>
+        <a href="{{ catalogRoute }}" class="btn btn-default btn-return">
+            <i class="fas fa-arrow-circle-left"></i>
+        </a>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+    {% if entity %}
+        <a class="btn btn-white" data-toggle="modal" data-target="#{{ modalId }}">
+            <i class="fas fa-times fa-sm">Delete row</i>
+        </a>
+    {% endif %}
+</div>
