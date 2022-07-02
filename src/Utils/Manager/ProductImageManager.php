@@ -2,19 +2,16 @@
 
 namespace App\Utils\Manager;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
+use App\Utils\Manager\AbstractBaseManager;
 use App\Entity\ProductImage;
 use App\Utils\File\ImageResizer;
 use App\Utils\Filesystem\FilesystemWorker;
-use Doctrine\ORM\EntityManagerInterface;
 
-class ProductImageManager
+
+class ProductImageManager extends AbstractBaseManager
 {
-
-    /**
-     *
-     * @var EntityManagerInterface
-     */
-    private $em;
 
     /**
      *
@@ -37,10 +34,15 @@ class ProductImageManager
 
     public function __construct(EntityManagerInterface $em, FilesystemWorker $filesystemWorker, ImageResizer $imageResizer, string $uploadsTempDir)
     {
-        $this->em = $em;
+        parent::__construct($em);
         $this->filesystemWorker = $filesystemWorker;
         $this->imageResizer = $imageResizer;
         $this->uploadsTempDir = $uploadsTempDir;
+    }
+
+    public function getRepository(): ObjectRepository
+    {
+        return $this->em->getRepository(ProductImage::class);
     }
 
     /**
