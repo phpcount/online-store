@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Form\DTO\EditProductModel;
 use App\Form\EditProductFormType;
 use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
@@ -36,16 +37,25 @@ class ProductController extends AbstractController
             $product = new Product();
         }
 
-        $form = $this->createForm(EditProductFormType::class, $product);
+        $editProductModel = EditProductModel::makeFromProduct($product);
+        
+        $form = $this->createForm(EditProductFormType::class, $editProductModel);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product = $productFormHandler->processEditForm($product, $form);
+            $product = $productFormHandler->processEditForm($editProductModel, $form);
+            $this->addFlash('success', 'Your changes were saved!');
             return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
+        } else {
+            // $this->addFlash('danger', 'Not valid.');
         }
 
-        $images = $product->getProductImages()->getValues()
-            ? $product->getProductImages()
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('warning', 'Something went wrong. Please check your form');
+        }
+
+        $images = $product->getProductImages()
+            ? $product->getProductImages()->getValues()
             : [];
 
         return $this->render('admin/product/edit.html.twig', [
@@ -60,7 +70,10 @@ class ProductController extends AbstractController
      */
     public function delete(Product $product, ProductManager $productManager): Response
     {
+        $title = $product->getTitle();
         $productManager->remove($product);
+
+        $this->addFlash('info', sprintf('The product: "%s" has been successfully deleted.', $title));
 
         return $this->redirectToRoute('admin_product_list');
     }

@@ -31,7 +31,9 @@
                     {{ 'Slug' }}
                 </div>
                 <div class="col-md-11">
-                    {{ product.slug }}
+                    {% if product and product.id %}
+                        {{ product.slug }}
+                    {% endif %}
                 </div>
             </div>
 
@@ -68,6 +70,18 @@
                     {{ form_widget(form.description) }}
                     <div class="form-error">
                         {{ form_errors(form.description) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-1">
+                    {{ form_label(form.category) }}
+                </div>
+                <div class="col-md-11">
+                    {{ form_widget(form.category) }}
+                    <div class="form-error">
+                        {{ form_errors(form.category) }}
                     </div>
                 </div>
             </div>
@@ -139,7 +153,7 @@
         </div>
     </div>
 
-    {% if product.id %}
+    {% if product and product.id %}
         {% include 'admin/_embed/_utils/_modal.html.twig' with {
             'id': 'approveDeleteModal',
             'title': 'Are you sure?',

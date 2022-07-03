@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Product;
+use App\Entity\Category;
+use App\Form\DTO\EditProductModel;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EditProductFormType extends AbstractType
@@ -46,7 +49,7 @@ class EditProductFormType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'required' => false,
                 'attr' => [
@@ -54,10 +57,23 @@ class EditProductFormType extends AbstractType
                     'style' => 'overflow: hidden;'
                 ]
             ])
+            ->add('category', EntityType::class, [
+                'label' => 'Category',
+                'required' => true,
+                // 'mapped' => false, // если в сущности поля нет, но в форме есть
+                'class' => Category::class,
+                // 'choice_label' => 'title',
+                'choice_label' => function ($category) {
+                    return $category->getTitle();
+                },
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+            ])
             ->add('newImage', FileType::class, [
                 'label' => 'Choose new image',
                 'required' => false,
-                'mapped' => false,
+                // 'mapped' => false, // если в сущности поля нет, но в форме есть
                 'attr' => [
                     'class' => 'form-control-file'
                 ],
@@ -88,7 +104,7 @@ class EditProductFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+            'data_class' => EditProductModel::class,
         ]);
     }
 }

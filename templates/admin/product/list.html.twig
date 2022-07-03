@@ -31,7 +31,7 @@
                             <td>{{ product.id }}</td>
                             <td>{% if product.category is defined and product.category %}{{ product.category.title }}{% endif %}</td>
                             <td>{{ product.title }}</td>
-                            <td>{{ product.price|format_currency('RUB', {padding_position: 'after_suffix'}) }}</td>
+                            <td>{{ product.price|format_currency('USD', {padding_position: 'after_suffix'}) }}</td>
                             <td>{{ product.quantity }}</td>
                             <td>
                                 {% set images = product.getProductImages().getValues() %}

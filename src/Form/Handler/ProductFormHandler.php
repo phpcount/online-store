@@ -3,6 +3,7 @@
 namespace App\Form\Handler;
 
 use App\Entity\Product;
+use App\Form\DTO\EditProductModel;
 use App\Utils\File\FileSaver;
 use App\Utils\Manager\ProductManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +30,13 @@ class ProductFormHandler
         $this->fileSaver = $fileSaver;
     }
 
-    public function processEditForm(Product $product, Form $form): Product
+    /**
+     *
+     * @param EditProductModel $editProductModel
+     * @param Form $form
+     * @return Product
+     */
+    public function processEditForm(EditProductModel $editProductModel, Form $form): Product
     {
         // TODO: ADD A NEW IMAGE WITH DIFFERENT SIZES TO THE PRODUCT
         // 1. Save product's changes (+)
@@ -46,6 +53,13 @@ class ProductFormHandler
         // 3.2.2 Create ProdcutImage it to for Prodcut (+)
 
         // 3.3 Save Product with new ProductImage (+)
+
+        $product = new Product();
+        if ($editProductModel->id) {
+            $product = $this->productManager->find($editProductModel->id);
+        }
+
+        $product = $editProductModel->makeProductFromModel($product);
 
         $newImageFile = $form->get('newImage')->getData();
 

@@ -46,12 +46,14 @@ abstract class AbstractBaseManager
         $this->em->flush();
     }
 
+   
     /**
      *
      * @param object $entity
+     * @param boolean $withFlush
      * @return void
      */
-    public function remove(object $entity)
+    public function remove(object $entity, $withFlush = true)
     {
         if (method_exists($entity, 'setIsDeleted')) {
             $entity->setIsDeleted(true);
@@ -59,6 +61,7 @@ abstract class AbstractBaseManager
             $this->em->remove($entity);
         }
         
-        $this->em->flush();
+        if ($withFlush)
+            $this->em->flush();
     }
 }

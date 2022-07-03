@@ -6,28 +6,33 @@
     <nav class="mobile-nav">
         <ul class="mobile-menu">
             <li class="menu-item">
-                <a href="#">
-                    <div>Jeans</div>
+                {% set catJeans = 'Jeans' %}
+                <a href="{{ path('main_category_show', {slug: catJeans|lower}) }}">
+                    <div>{{ catJeans }}</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
-                    <div>Hats</div>
+                {% set catHats = 'Hats' %}
+                <a href="{{ path('main_category_show', {slug: catHats|lower}) }}">
+                    <div>{{ catHats }}</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
-                    <div>Jackets</div>
+                {% set catJackets = 'Jackets' %}
+                <a href="{{ path('main_category_show', {slug: catJackets|lower}) }}">
+                    <div>{{ catJackets }}</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
-                    <div>Dresses</div>
+                {% set catDresses = 'Dresses' %}
+                <a href="{{ path('main_category_show', {slug: catDresses|lower}) }}">
+                    <div>{{ catDresses }}</div>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#">
-                    <div>Sneakers</div>
+                {% set catSneakers = 'Sneakers' %}
+                <a href="{{ path('main_category_show', {slug: catSneakers|lower}) }}">
+                    <div>{{ catSneakers }}</div>
                 </a>
             </li>
             <li class="menu-item font-weight-bold">
