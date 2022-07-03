@@ -8,6 +8,7 @@
     <div class="container-fluid mt-2">
         <div class="row">
             <div class="col-lg-6">
+                {% set catJeans = 'Jeans' %}
                 <div class="banner banner-big">
                     <a href="#">
                         <img src="{{ asset('build/images/banner/collection/banner_1.jpg') }}" alt="banner">
@@ -18,9 +19,9 @@
                             New Collection!
                         </h3>
                         <h2 class="banner-title">
-                            Jeans
+                            {{ catJeans }}
                         </h2>
-                        <a href="#" class="btn btn-link">
+                        <a href="{{ path('main_category_show', {slug: catJeans|lower}) }}" class="btn btn-link">
                             Show me
                         </a>
                     </div>
@@ -28,6 +29,7 @@
             </div>
 
             <div class="col-lg-6">
+                {% set catJackets = 'Jackets' %}
                 <div class="banner banner-big">
                     <a href="#">
                         <img src="{{ asset('build/images/banner/collection/banner_2.jpg') }}" alt="banner">
@@ -38,9 +40,9 @@
                             Discounts Over 50%
                         </h3>
                         <h2 class="banner-title">
-                            Jackets
+                            {{ catJackets }}
                         </h2>
-                        <a href="#" class="btn btn-link">
+                        <a href="{{ path('main_category_show', {slug: catJackets|lower}) }}" class="btn btn-link">
                             Show me
                         </a>
                     </div>
@@ -50,6 +52,7 @@
 
         <div class="row mt-1 justify-content-center align-items-center">
             <div class="col-md-6 col-lg-4">
+                {% set catHats = 'Hats' %}
                 <div class="banner banner-middle">
                     <a href="#">
                         <img src="{{ asset('build/images/banner/collection/banner_3.jpg') }}" alt="banner">
@@ -59,14 +62,15 @@
                         <h3 class="banner-subtitle">
                             Unique!
                         </h3>
-                        <a href="#" class="btn btn-link">
-                            Hats
+                        <a href="{{ path('main_category_show', {slug: catHats|lower}) }}" class="btn btn-link">
+                            {{ catHats }}
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-4">
+                {% set catDresses = 'Dresses' %}
                 <div class="banner banner-middle">
                     <a href="#">
                         <img src="{{ asset('build/images/banner/collection/banner_4.jpg') }}" alt="banner">
@@ -76,14 +80,15 @@
                         <h3 class="banner-subtitle">
                             Fashionable!
                         </h3>
-                        <a href="#" class="btn btn-link">
-                            Dresses
+                        <a href="{{ path('main_category_show', {slug: catDresses|lower}) }}" class="btn btn-link">
+                            {{ catDresses }}
                         </a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-4">
+                {% set catSneakers = 'Sneakers' %}
                 <div class="banner banner-middle">
                     <a href="#">
                         <img src="{{ asset('build/images/banner/collection/banner_5.jpg') }}" alt="banner">
@@ -93,8 +98,8 @@
                         <h3 class="banner-subtitle text-white">
                             Branded!
                         </h3>
-                        <a href="#" class="btn btn-link">
-                            Sneakers
+                        <a href="{{ path('main_category_show', {slug: catSneakers|lower}) }}" class="btn btn-link">
+                            {{ catSneakers }}
                         </a>
                     </div>
                 </div>

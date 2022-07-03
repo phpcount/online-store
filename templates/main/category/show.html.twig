@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 mb-2">
                     <div class="page-title2">
-                        <a class="page-title title-gradient-1">...</a>
+                        <a class="page-title title-gradient-1">{{ category.title }}</a>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                                                     <img src="{{ asset('uploads/images/products/' ~ product.id ~ '/' ~ cover.filenameMiddle) }}" alt="{{ product.title }}" class="product-image">
                                                 </a>
                                                 <div class="product-actions">
-                                                    <a href="#" class="btn-add-to-cart">
+                                                    <a onclick="addProductToCart('{{ product.uuid }}')" href="#" class="btn-add-to-cart">
                                                         add to cart
                                                     </a>
                                                 </div>
@@ -56,4 +56,28 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('build/axios.min.js') }}"></script>
+<script>
+    const urlSaveProductToCart = '{{ path("main_api_cart_save") }}';
+
+    function addProductToCart(uuid) {
+        console.log(uuid, urlSaveProductToCart);
+        
+        // const formData = new FormData();
+        // formData.append('productId', uuid);
+        // axios.post(urlSaveProductToCart, formData)
+
+        axios.post(urlSaveProductToCart, {
+            productId: uuid
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+</script>
 {% endblock %}

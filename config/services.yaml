@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    cookie_guest_name: 'guest_uuid' 
+    cookie_guest_time: 604800 # 3600 * 24 * 7; 
     uploads_dir: '%kernel.project_dir%/public/uploads'
     uploads_temp_dir: '%uploads_dir%/temp'
     uploads_images_dir: '%uploads_dir%/images'

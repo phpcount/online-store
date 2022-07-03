@@ -35,14 +35,13 @@
                             <div class="product-full-filters">
                                 <div class="form-group ml-4">
                                     <label for="product_full_filter_quantity">Qty:</label>
-                                    {% set quantityStartValue = product.quantity > 0 ? 1 : 0 %}
                                     <input
                                         type="number"
                                         id="product_full_filter_quantity"
-                                        {% if quantityStartValue == 0 %}disabled="disabled"{% endif %}
+                                        {% if product.quantity == 0 %}disabled="disabled"{% endif %}
                                         class="form-control"
-                                        value="{{ quantityStartValue }}"
-                                        min="{{ quantityStartValue }}"
+                                        value="{{ product.quantity }}"
+                                        min="1"
                                         max="{{ product.quantity }}"
                                         step="1"
                                         data-decimals="0"

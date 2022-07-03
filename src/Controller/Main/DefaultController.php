@@ -4,9 +4,13 @@ namespace App\Controller\Main;
 
 use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Uid\Uuid;
+
+use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
 class DefaultController extends AbstractController
 {
@@ -19,11 +23,24 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", methods="GET", name="main_homepage")
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $productList = $this->getEm()->getRepository(Product::class)->findAll();
+        // $productList = $this->getEm()->getRepository(Product::class)->findAll();
         // dd($productList);
-        return $this->render('main/default/index.html.twig', []);
+        $response = new Response();
+
+        $cookieGuestName = $this->getParameter('cookie_guest_name');
+        if (!$request->cookies->has($cookieGuestName)) {
+            $expires = time() + $this->getParameter('cookie_guest_time');
+            $cookie = Cookie::create($this->getParameter('cookie_guest_name'), Uuid::v4(),  $expires);
+            $response->headers->setCookie($cookie);
+        }
+
+        $response->headers->set('Content-Type', 'text/html');
+        $content = $this->renderView('main/default/index.html.twig', []);
+        $response->setContent($content);
+
+        return $response;
     }
 
     // /**
