@@ -101,4 +101,9 @@
             </div>
         </div>
     </div>
+
+    {{ render(controller('App\\Controller\\Main\\EmbedController::showSimilarProducts', {
+        productCount: 4,
+        resultShuffle: true
+    })) }}
 {% endblock %}

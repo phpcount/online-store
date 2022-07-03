@@ -62,5 +62,17 @@
                 </div>
             </div>
         </div>
+        {# widget #}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    {{ render(controller('App\\Controller\\Main\\EmbedController::showSimilarProducts', {
+                        categoryId: product.category.id,
+                        productCount: 4,
+                        resultShuffle: true
+                    })) }}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\DTO\EditProductModel;
-use App\Form\EditProductFormType;
+use App\Form\Admin\EditProductFormType;
 use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use App\Utils\Manager\ProductManager;
@@ -45,6 +45,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $product = $productFormHandler->processEditForm($editProductModel, $form);
             $this->addFlash('success', 'Your changes were saved!');
+
             return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
         } else {
             // $this->addFlash('danger', 'Not valid.');
