@@ -21,12 +21,12 @@ class CategoryManager extends AbstractBaseManager
      * @param Category $entity
      * @return void
      */
-    public function remove(object $entity, $withFlush = true)
+    public function remove(object $entity, $withFlush = false)
     {
         if(!$entity->getProducts()->isEmpty())
             /** @var Product $product */
             foreach ($entity->getProducts()->getValues() as $product) {
-                parent::remove($product, false);
+                parent::remove($product);
             }
         
         parent::remove($entity, $withFlush);

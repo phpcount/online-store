@@ -34,7 +34,7 @@ abstract class AbstractBaseManager
     {
         return $this->getRepository()->find($id);
     }
-
+    
     /**
      *
      * @param object $entity
@@ -42,10 +42,12 @@ abstract class AbstractBaseManager
      */
     public function save(object $entity)
     {
+        if (property_exists($entity, 'updatedAt')) {
+            $entity->setUpdatedAt(new \DateTimeImmutable());
+        }
         $this->em->persist($entity);
         $this->em->flush();
     }
-
    
     /**
      *
@@ -53,9 +55,9 @@ abstract class AbstractBaseManager
      * @param boolean $withFlush
      * @return void
      */
-    public function remove(object $entity, $withFlush = true)
+    public function remove(object $entity, $withFlush = false)
     {
-        if (method_exists($entity, 'setIsDeleted')) {
+        if (property_exists($entity, 'isDeleted')) {
             $entity->setIsDeleted(true);
         } else {
             $this->em->remove($entity);

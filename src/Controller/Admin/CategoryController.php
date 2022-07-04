@@ -62,7 +62,7 @@ class CategoryController extends AbstractController
     public function delete(CategoryManager $categoryManager, Category $category = null): Response
     {
         $title = $category->getTitle();
-        $categoryManager->remove($category);
+        $categoryManager->remove($category, true);
 
         $this->addFlash('info', sprintf('The category: "%s" was successfully deleted.', $title));
         

@@ -72,7 +72,7 @@ class ProductController extends AbstractController
     public function delete(Product $product, ProductManager $productManager): Response
     {
         $title = $product->getTitle();
-        $productManager->remove($product);
+        $productManager->remove($product, true);
 
         $this->addFlash('info', sprintf('The product: "%s" has been successfully deleted.', $title));
 
