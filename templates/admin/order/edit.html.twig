@@ -3,6 +3,10 @@
 
 {% block title_detailed %}Edit {{ title }}{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app-admin-order') }}
+{% endblock %}
+
 {% block body %}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -82,7 +86,7 @@
                     Product table
                 </div>
                 <div class="col-md-11 table-container-briefly" style="max-height: 360px;overflow-y: scroll;">
-                    <table class="table table-hover">
+                    {# <table class="table table-hover">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
@@ -94,9 +98,6 @@
                         <tbody>
                         {% for orderProduct in order.orderProducts %}
                             {% set prodcut = orderProduct.product %}
-                            {# <div>
-                                #{{ prodcut.id }} - {{ prodcut.title }} - {{ orderProduct.quantity }} - {{ orderProduct.pricePerOne }}
-                            </div> #}
                             <tr>
                                 <th scope="row">{{ prodcut.id }}</th>
                                 <td><a href="{{ path('main_product_show', {uuid: prodcut.uuid}) }}" target="_blank" rel="noopener noreferrer">{{ prodcut.title }}</a></td>
@@ -105,7 +106,10 @@
                             </tr>
                         {% endfor %}
                         </tbody>
-                    </table>
+                    </table> #}
+                    <div id="app">
+
+                    </div>
                 </div>
             </div>
 
@@ -138,4 +142,29 @@
             'btnText': 'Delete row'
         } %}
     {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    // const ORDER_PRODUCTS = JSON.parse('{ orderProducts|json_encode|raw }');
+</script>
+<script id="pageData" type="application/json">
+    // {
+    //     "orderProducts": { orderProducts|json_encode|raw }
+    // }
+</script>
+<script>
+    window.staticStore = {
+        urlApiOrder: '{{ path("api_orders_get_collection") }}',
+        urlApiProduct: '{{ path("api_products_get_collection") }}',
+        urlApiOrderProduct: '{{ path("api_order_products_get_collection") }}',
+        urlApiCategory: '{{ path("api_categories_get_collection") }}',
+        urlViewProduct: '{{ path("admin_product_edit_blank") }}',
+
+        orderId: '{{ order.id is null ? null : order.id }}',
+        // orderProducts: JSON.parse('{ orderProducts|json_encode|raw }'),
+    }
+</script>
+    {{ encore_entry_script_tags('app-admin-order') }}
 {% endblock %}

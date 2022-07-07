@@ -65,7 +65,6 @@ class OrderManager extends AbstractBaseManager
             ->setOwner($user)
             ->setStatus(OrderStaticStorage::ORDER_STATUS_CREATED)
         ;
-        $orderTotalPrice = 0;
 
         /** @var CartProduct $cartProduct  */
         foreach ($cart->getCartProducts()->getValues() as $cartProduct) {
@@ -79,17 +78,24 @@ class OrderManager extends AbstractBaseManager
                 ->setPricePerOne($product->getPrice())
             ;
 
-            $orderTotalPrice += $orderProduct->getQuantity() * $orderProduct->getPricePerOne();
-            
             $order->addOrderProduct($orderProduct);
             $this->em->persist($orderProduct);
         }
-
-        $order->setTotalPrice($orderTotalPrice);
 
         $this->save($order);
         $this->remove($cart, true);
     }
 
+    public function calcTotalPrice(Order $order): void
+    {
+        $orderTotalPrice = 0;
+
+        /** @var OrderProduct $orderProduct  */
+        foreach ($order->getOrderProducts()->getValues() as $orderProduct) {
+            $orderTotalPrice += $orderProduct->getQuantity() * $orderProduct->getPricePerOne();
+        }
+        
+        $order->setTotalPrice($orderTotalPrice);
+    }
 
 }

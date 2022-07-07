@@ -3,7 +3,6 @@
 namespace App\Form\Handler;
 
 use App\Entity\Order;
-use App\Entity\OrderProduct;
 use App\Utils\Manager\OrderManager;
 
 class OrderFormHandler
@@ -27,6 +26,7 @@ class OrderFormHandler
      */
     public function processEditForm(Order $order): Order
     {
+        $this->orderManager->calcTotalPrice($order);
 
         $this->orderManager->save($order);
 

@@ -23,6 +23,8 @@ Encore
     .addEntry('section-main', './assets/section-main.js')
     .addEntry('section-admin', './assets/section-admin.js')
 
+    .addEntry('app-admin-order', './assets/js/section/admin/admin-order/app.js')
+
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     // .enableStimulusBridge('./assets/controllers.json')
 
@@ -69,6 +71,9 @@ Encore
 
     // uncomment if you use React
     //.enableReactPreset()
+
+    // Vue
+    .enableVueLoader()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher

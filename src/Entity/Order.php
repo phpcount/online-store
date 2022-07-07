@@ -7,10 +7,29 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource as Api;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
  * @ORM\Table(name="`order`")
+ * 
+  * @Api(
+ *      collectionOperations={ 
+ *          "get"={
+ *                  "normalization_context"={"groups"="order:list"}
+ *                },
+ *          "post"={
+ *                  "security"="is_granted('ROLE_ADMIN')",
+ *                  "normalization_context"={"groups"="order:list:write"}
+ *                 }
+ *       },
+ *      itemOperations={
+ *          "get"={
+ *                  "normalization_context"={"groups"="order:item"}
+ *                 }
+ *      }
+ * )
  */
 class Order
 {
@@ -18,6 +37,8 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"order:item"})
      */
     private $id;
 
@@ -34,6 +55,8 @@ class Order
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({"order:item"})
      */
     private $status;
 
@@ -44,6 +67,8 @@ class Order
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * 
+     * @Groups({"order:item"})
      */
     private $updatedAt;
 
@@ -54,6 +79,8 @@ class Order
 
     /**
      * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="appOrder")
+     * 
+     * @Groups({"order:item"})
      */
     private $orderProducts;
 

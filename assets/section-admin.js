@@ -2,7 +2,7 @@ const $ = require('jquery');
 
 require('bootstrap');
 
-global.$ = global.JQuery = $;
+global.$ = global.jQuery = $;
 
 require('jquery.easing');
 require('chart.js');
