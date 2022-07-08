@@ -1,0 +1,24 @@
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app-menu-cart') }}
+{% endblock %}
+
+<div id="app-menu-cart"></div>
+
+{% block javascripts %}
+<script src="{{ asset('build/services/global-store.js') }}"></script>
+<script>
+setDataInGlobalObj('staticStore', {
+        urlApiCart: '{{ path("api_carts_get_collection") }}',
+        urlApiProduct: '{{ path("api_products_get_collection") }}',
+        urlApiCartProducts: '{{ path("api_cart_products_get_collection") }}',
+        urlApiOrder: '{{ path("api_orders_get_collection") }}',
+
+        
+        urlViewCart: '{{ path("main_cart_show") }}',
+        urlViewProduct: '{{ path("main_product_show_blank") }}',
+        urlAssetImageProducts: '{{ asset("uploads/images/products") }}'
+    }
+)
+</script>
+    {{ encore_entry_script_tags('app-menu-cart') }}
+{% endblock %}

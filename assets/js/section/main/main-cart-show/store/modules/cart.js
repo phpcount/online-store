@@ -52,7 +52,7 @@ const actions = {
 
             let isSuccess = false;
 
-            if (members.length && members[0].cartProducts.length) {
+            if (members.length) {
                 commit('setCart', members[0]);
                 isSuccess = true;
 

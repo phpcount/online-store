@@ -58,25 +58,31 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-<script src="{{ asset('utils/axios/axios.min.js') }}"></script>
+{# <script src="{{ asset('utils/axios/axios.min.js') }}"></script> #}
 <script>
-    const urlSaveProductToCart = '{{ path("main_api_cart_save") }}';
+    // const urlSaveProductToCart = '{{ path("main_api_cart_save") }}';
+
+    // function addProductToCart(uuid) {
+    //     console.log(uuid, urlSaveProductToCart);
+        
+    //     // const formData = new FormData();
+    //     // formData.append('productId', uuid);
+    //     // axios.post(urlSaveProductToCart, formData)
+
+    //     axios.post(urlSaveProductToCart, {
+    //         productId: uuid
+    //     })
+    //     .then(function (response) {
+    //         console.log(response);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+    // }
 
     function addProductToCart(uuid) {
-        console.log(uuid, urlSaveProductToCart);
-        
-        // const formData = new FormData();
-        // formData.append('productId', uuid);
-        // axios.post(urlSaveProductToCart, formData)
-
-        axios.post(urlSaveProductToCart, {
-            productId: uuid
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
+        window.vueMenuCartInstance.addCartProduct({
+            uuid
         });
     }
 </script>

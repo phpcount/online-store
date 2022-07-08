@@ -38,11 +38,12 @@
                                     <input
                                         type="number"
                                         id="product_full_filter_quantity"
-                                        {% if product.quantity == 0 %}disabled="disabled"{% endif %}
+                                        {# {% if product.quantity == 0 %}disabled="disabled"{% endif %} #}
                                         class="form-control"
                                         value="{{ product.quantity }}"
                                         min="1"
-                                        max="{{ product.quantity }}"
+                                        {# max="{{ product.quantity }}" #}
+                                        max="100"
                                         step="1"
                                         data-decimals="0"
                                         required
@@ -51,7 +52,7 @@
                             </div>
 
                             <div class="product-full-action">
-                                <a href="#" class="btn btn-link btn-dark">
+                                <a href="#" class="btn btn-link btn-dark" id="btn_add_product_to_cart">
                                     <i class="fas fa-cart-plus"></i>
                                     <span>add to cart</span>
                                 </a>
@@ -74,4 +75,24 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    const btnAddProductToCartEl = document.getElementById('btn_add_product_to_cart');
+    const InputProductQuantityEl = document.getElementById('product_full_filter_quantity');
+
+    btnAddProductToCartEl.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const data = {
+            uuid: '{{ product.uuid }}',
+            quantity: parseInt(InputProductQuantityEl.value)
+        };
+
+        window.vueMenuCartInstance.addCartProduct(data);
+    };
+
+</script>
 {% endblock %}
