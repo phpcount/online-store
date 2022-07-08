@@ -19,10 +19,10 @@ class CartController extends AbstractController
      */
     public function show(Request $request, CartManager $cartManager): Response
     {
-        $phpSessionId = $request->cookies->get('PHPSESSID');
-        $cart = $cartManager->getRepository()->findOneBy(['sessionId' => $phpSessionId]);
-
-        return $this->render('main/cart/show.html.twig', compact('cart'));
+        // $phpSessionId = $request->cookies->get('PHPSESSID');
+        // $cart = $cartManager->getRepository()->findOneBy(['sessionId' => $phpSessionId]);
+        // return $this->render('main/cart/show.html.twig', compact('cart'));
+        return $this->render('main/cart/show.html.twig');
     }
     /**
      * @Route("/create", name="create")

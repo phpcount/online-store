@@ -146,6 +146,7 @@
 
 
 {% block javascripts %}
+<script src="{{ asset('build/services/global-store.js') }}"></script>
 <script>
     // const ORDER_PRODUCTS = JSON.parse('{ orderProducts|json_encode|raw }');
 </script>
@@ -155,7 +156,7 @@
     // }
 </script>
 <script>
-    window.staticStore = {
+setDataInGlobalObj('staticStore', {
         urlApiOrder: '{{ path("api_orders_get_collection") }}',
         urlApiProduct: '{{ path("api_products_get_collection") }}',
         urlApiOrderProduct: '{{ path("api_order_products_get_collection") }}',
@@ -165,6 +166,7 @@
         orderId: '{{ order.id is null ? null : order.id }}',
         // orderProducts: JSON.parse('{ orderProducts|json_encode|raw }'),
     }
+)
 </script>
     {{ encore_entry_script_tags('app-admin-order') }}
 {% endblock %}

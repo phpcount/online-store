@@ -84,3 +84,6 @@ body {
 .text-center {
     text-align: center !important;
 }
+
+[v-cloak] { display:none; }
+

@@ -24,6 +24,7 @@ Encore
     .addEntry('section-admin', './assets/section-admin.js')
 
     .addEntry('app-admin-order', './assets/js/section/admin/admin-order/app.js')
+    .addEntry('app-main-cart-show', './assets/js/section/main/main-cart-show/app.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     // .enableStimulusBridge('./assets/controllers.json')
@@ -35,10 +36,16 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
-    .copyFiles({ 
-        from: './assets/images',
-        to: 'images/[path][name].[hash:8].[ext]'
-    })
+    .copyFiles([
+        { 
+            from: './assets/js/section/services/',
+            to: 'services/[path][name].[hash:8].[ext]'
+        },
+        { 
+            from: './assets/images',
+            to: 'images/[path][name].[hash:8].[ext]'
+        }
+    ])
 
     /*
      * FEATURE CONFIG

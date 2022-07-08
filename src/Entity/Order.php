@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=OrderRepository::class)
  * @ORM\Table(name="`order`")
  * 
-  * @Api(
+ * @Api(
  *      collectionOperations={ 
  *          "get"={
  *                  "normalization_context"={"groups"="order:list"}

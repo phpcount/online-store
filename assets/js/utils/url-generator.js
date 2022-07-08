@@ -1,4 +1,10 @@
 export function getUrlViewProduct(viewUrl, productId) {
+    const lastSym = viewUrl.length;
+
+    if (lastSym && viewUrl[lastSym - 1] === '/') {
+        viewUrl = viewUrl.slice(0,-1);
+    }
+
     return (
         window.location.protocol + 
         '//' +

@@ -15,6 +15,7 @@ class ProductController extends AbstractController
 {
     /**
      * @Route("/{uuid}", name="show")
+     * @Route("/", name="show_blank")
      */
     public function show(Product $product = null): Response
     {
