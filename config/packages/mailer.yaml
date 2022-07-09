@@ -1,3 +1,5 @@
 framework:
     mailer:
+        headers:
+            from: 'Robot <robot@online-store.com>'
         dsn: '%env(MAILER_DSN)%'

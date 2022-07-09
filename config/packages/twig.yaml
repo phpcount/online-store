@@ -1,2 +1,5 @@
 twig:
+    paths:
+        'assets/images': images # pointer into folder, simple: @images
+        'public': public
     default_path: '%kernel.project_dir%/templates'

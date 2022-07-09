@@ -4,6 +4,7 @@ namespace App\Utils\ApiPlatform\EventSubscriber;
 
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Order;
+use App\Event\OrderCreatedFromCartEvent;
 use App\Utils\Manager\OrderManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Security;
 use App\Utils\Helpers\JsonHandler;
 use Exception;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class MakeOrderFromCartSubscriber implements EventSubscriberInterface
 {
@@ -27,10 +29,32 @@ class MakeOrderFromCartSubscriber implements EventSubscriberInterface
      */
     private $orderManager;
 
-    public function __construct(Security $security, OrderManager $orderManager)
+    /**
+     *
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    public function __construct(Security $security, OrderManager $orderManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->security = $security;
         $this->orderManager = $orderManager;
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * Returns an array of event names this subscriber wants to listen to.
+     *
+     * @return array<string, mixed> The event names to listen to
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            KernelEvents::VIEW => [
+                [ 'makeOrder', EventPriorities::PRE_WRITE ],
+                [ 'sendNotificationsAboutNewOrder', EventPriorities::POST_WRITE ]
+            ]
+        ];
     }
 
     public function makeOrder(ViewEvent $viewEvent)
@@ -55,20 +79,17 @@ class MakeOrderFromCartSubscriber implements EventSubscriberInterface
         $this->orderManager->addOrderProductsFromCart($order, $user, $contentObj->cartId);
     }
 
-
-    /**
-     * Returns an array of event names this subscriber wants to listen to.
-     *
-     * @return array<string, mixed> The event names to listen to
-     */
-    public static function getSubscribedEvents()
+    public function sendNotificationsAboutNewOrder(ViewEvent $viewEvent)
     {
-        return [
-            KernelEvents::VIEW => [
-                [
-                    'makeOrder', EventPriorities::PRE_WRITE
-                ]
-            ]
-        ];
+        $order = $viewEvent->getControllerResult();
+        $method = $viewEvent->getRequest()->getMethod();
+
+        if (Request::METHOD_POST !== $method || !$order instanceof Order) {
+            return;
+        }
+
+        $event = new OrderCreatedFromCartEvent($order);
+        $this->eventDispatcher->dispatch($event);
     }
+
 }

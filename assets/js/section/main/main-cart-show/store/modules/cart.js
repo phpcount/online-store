@@ -113,6 +113,7 @@ const actions = {
         const result = await axios.delete(url, API_CONFIG);
 
         if (result.status === StatusCodes.NO_CONTENT) {
+            commit('setCart', {});
             dispatch('getCart');
         }
     },
@@ -129,7 +130,7 @@ const actions = {
         if (result.status === StatusCodes.CREATED) {
             commit('setAlert', { 
                 type: 'success', 
-                message: 'tahnk you for your purchase! Our manager will contact with you in 24 hours.' 
+                message: 'Thank you for your purchase! Our manager will contact with you in 24 hours.' 
             });
             commit('setIsSentForm', true);
             

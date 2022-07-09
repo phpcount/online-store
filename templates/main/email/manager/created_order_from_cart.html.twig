@@ -1,0 +1,58 @@
+{% extends 'main/email/base.html.twig '%}
+
+{% block content %}
+<div>
+    <row>
+        <columns>
+            <spacer size="35">
+                <center>
+                    <h1>{{ h1Title }}</h1>
+                </center>
+            </spacer>
+            <spacer size="10"></spacer>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <center>
+                <h2>Order info:</h2>
+            </center>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <td>№</td>
+                        <td>Title</td>
+                        <td>Quantity</td>
+                        <td>Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orderProduct in order.orderProducts %}
+                        <tr>
+                            <td>
+                                {{ loop.index }}
+                            </td>
+                            <td>
+                                {{ orderProduct.product.title }}
+                            </td>
+                            <td>
+                                x{{ orderProduct.quantity }}
+                            </td>
+                            <td>
+                                {{ orderProduct.pricePerOne|format_currency('USD') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <spacer size="10"></spacer>
+            <p>
+                <strong>Total price: {{ order.totalPrice|format_currency('USD') }}</strong>
+            </p>
+        </columns>
+    </row>
+{% endblock %}
