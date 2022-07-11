@@ -19,6 +19,7 @@ class UserFactory
             ->setEmail($googleUser->getEmail())
             ->setFullName($googleUser->getName())
             ->setGoogleId($googleUser->getId())
+            ->setIsVerified(true)
         ;
 
         return $user;
