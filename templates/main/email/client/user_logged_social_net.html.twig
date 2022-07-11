@@ -1,0 +1,37 @@
+{% extends 'main/email/base.html.twig '%}
+
+{% block content %}
+<div>
+    <row>
+        <columns>
+            <spacer size="35">
+                <center>
+                    <h1>{{ h1Title }}</h1>
+                </center>
+            </spacer>
+            <spacer size="10"></spacer>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <p>
+                Hello, {{ user.fullName }}!
+            </p>
+            </br>
+            </br>
+            <p>
+                To login into your profile use this new password:
+            </p>
+            <strong>
+                {{ plainPassword }}
+            </strong>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <a href="{{ profileUrl }}" target="_blank">
+                Visit our profile
+            </a>
+        </columns>
+    </row>
+{% endblock %}

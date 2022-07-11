@@ -6,7 +6,7 @@ use App\Event\OrderCreatedFromCartEvent;
 use App\Utils\Mailer\Sender\OrderCreatedFromCartEmailSender;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class OrderCreatedFromCartSendNotificationSubscriber implements EventSubscriberInterface
+class OrderCreatedFromCartNotificationSubscriber implements EventSubscriberInterface
 {
 
     /**
