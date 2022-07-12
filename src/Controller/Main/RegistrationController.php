@@ -4,6 +4,7 @@ namespace App\Controller\Main;
 
 use App\Entity\User;
 use App\Form\Main\RegistrationFormType;
+use App\Messenger\Message\Event\UserRegisteredEvent;
 use App\Repository\UserRepository;
 use App\Security\Verifier\EmailVerifier;
 use App\Utils\Manager\UserManager;
@@ -11,7 +12,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -28,7 +29,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route({ "en": "/registartion", "ru": "/регитсрация" }, name="main_registration")
      */
-    public function registration(Request $request, UserManager $userManager): Response
+    public function registration(Request $request, UserManager $userManager, MessageBusInterface $messageBus): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('main_profile_index');
@@ -41,17 +42,12 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $userManager->hashPassword($user, $form->get('plainPassword')->getData());
-
             $userManager->save($user);
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('main_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('robot@online-shop.com', 'Robot'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('main//email/security/confirmation_email.html.twig')
-            );
+            $event = new UserRegisteredEvent($user->getId());
+            $messageBus->dispatch($event);
+
             // do anything else you need here, like send an email
             $this->addFlash('success', 'An email has been sent. Please check your inbox to complete registration.');
 
