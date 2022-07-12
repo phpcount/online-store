@@ -10,13 +10,13 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class MailerSender
 {
-    
+
     /**
      *
      * @var MailerInterface
      */
     private $mailer;
-    
+
     /**
      *
      * @var LoggerInterface
@@ -35,7 +35,7 @@ class MailerSender
         $email = new TemplatedEmail();
         $email
             ->to($mailerOptions->getRecipient())
-            
+
             ->subject($mailerOptions->getSubject())
             ->htmlTemplate($mailerOptions->getHtmlTemplate())
             ->context($mailerOptions->getContext())
