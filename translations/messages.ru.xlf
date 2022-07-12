@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="ru" trgLang="ru">
+  <file id="messages.ru">
+    <unit id="KlOdZSA" name="email@example.com">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Main\RegistrationFormType.php:28</note>
+      </notes>
+      <segment>
+        <source>email@example.com</source>
+        <target>email@example.com</target>
+      </segment>
+    </unit>
+    <unit id="sMIMdUS" name="user_signup.heading">
+      <notes>
+        <note category="file-source" priority="1">online-store\templates\main\security\registration.html.twig:12</note>
+      </notes>
+      <segment>
+        <source>user_signup.heading</source>
+        <target>Форма регистрации</target>
+      </segment>
+    </unit>
+    <unit id="nnXItbl" name="label.enter_password">
+      <segment>
+        <source>label.enter_password</source>
+        <target>Введите ваш пароль</target>
+      </segment>
+    </unit>
+    <unit id="94mmMje" name="label.enter_email">
+      <segment>
+        <source>label.enter_email</source>
+        <target>Введите ваш email</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

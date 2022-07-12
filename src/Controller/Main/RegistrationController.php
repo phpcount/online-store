@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/registration", name="main_registration")
+     * @Route({ "en": "/registartion", "ru": "/регитсрация" }, name="main_registration")
      */
     public function registration(Request $request, UserManager $userManager): Response
     {

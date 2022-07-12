@@ -20,12 +20,12 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Enter your email',
+                'label' => 'label.enter_email',
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
                     'autofocus' => 'autofocus',
-                    'placeholder' => 'Please, enter your email'
+                    'placeholder' => 'email@example.com'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -56,7 +56,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'label' => 'Enter your password',
+                'label' => 'label.enter_password',
                 'required' => false,
                 'mapped' => false,
                 'attr' => [

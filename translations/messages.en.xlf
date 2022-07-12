@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="ru" trgLang="en">
+  <file id="messages.en">
+    <unit id="sMIMdUS" name="user_signup.heading">
+      <notes>
+        <note category="file-source" priority="1">online-store\templates\main\security\registration.html.twig:12</note>
+      </notes>
+      <segment>
+        <source>user_signup.heading</source>
+        <target>Registration Form</target>
+      </segment>
+    </unit>
+    <unit id="94mmMje" name="label.enter_email">
+      <segment>
+        <source>label.enter_email</source>
+        <target>Enter your email</target>
+      </segment>
+    </unit>
+    <unit id="nnXItbl" name="label.enter_password">
+      <segment>
+        <source>label.enter_password</source>
+        <target>Enter your password</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

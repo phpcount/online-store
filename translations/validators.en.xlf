@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="ru" trgLang="en">
+  <file id="validators.en">
+    <unit id="YRKYC4." name="There is already an account with this email">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Entity\User.php:0</note>
+      </notes>
+      <segment>
+        <source>There is already an account with this email</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="_2tgESq" name="Your password must be at least {{ limit }} characters long">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Admin\EditUserFormType.php:40</note>
+      </notes>
+      <segment>
+        <source>Your password must be at least {{ limit }} characters long</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="QD0qbae" name="Email is not valid">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Admin\EditUserFormType.php:118</note>
+      </notes>
+      <segment>
+        <source>Email is not valid</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="bH3T3JL" name="Please enter a title">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\DTO\EditCategoryModel.php:0</note>
+        <note category="file-source" priority="1">online-store\src\Form\DTO\EditProductModel.php:0</note>
+      </notes>
+      <segment>
+        <source>Please enter a title</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="KqsDjMt" name="Please enter a price">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\DTO\EditProductModel.php:0</note>
+      </notes>
+      <segment>
+        <source>Please enter a price</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="B3lzhPz" name="Please upload a valid image">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\DTO\EditProductModel.php:0</note>
+      </notes>
+      <segment>
+        <source>Please upload a valid image</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="PTfC_7X" name="Please enter a quantity">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\DTO\EditProductModel.php:0</note>
+      </notes>
+      <segment>
+        <source>Please enter a quantity</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="ka8XRfM" name="Please select a category">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\DTO\EditProductModel.php:0</note>
+      </notes>
+      <segment>
+        <source>Please select a category</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="TdLhlyP" name="The password fields must match.">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Main\ChangePasswordFormType.php:18</note>
+      </notes>
+      <segment>
+        <source>The password fields must match.</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="YXZ26gK" name="Please enter a password">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Main\ChangePasswordFormType.php:27</note>
+        <note category="file-source" priority="1">online-store\src\Form\Main\RegistrationFormType.php:69</note>
+      </notes>
+      <segment>
+        <source>Please enter a password</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id=".esazsm" name="Your password should be at least {{ limit }} characters">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Main\ChangePasswordFormType.php:31</note>
+        <note category="file-source" priority="1">online-store\src\Form\Main\RegistrationFormType.php:73</note>
+      </notes>
+      <segment>
+        <source>Your password should be at least {{ limit }} characters</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="UV37Vor" name="Please, fill the field">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Main\RegistrationFormType.php:32</note>
+      </notes>
+      <segment>
+        <source>Please, fill the field</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="8RY8uAw" name="Please, check the box">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Main\RegistrationFormType.php:52</note>
+      </notes>
+      <segment>
+        <source>Please, check the box</source>
+        <target></target>
+      </segment>
+    </unit>
+    <unit id="Fe2zEyl" name="Please enter your email">
+      <notes>
+        <note category="file-source" priority="1">online-store\src\Form\Main\ResetPasswordRequestFormType.php:23</note>
+      </notes>
+      <segment>
+        <source>Please enter your email</source>
+        <target></target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

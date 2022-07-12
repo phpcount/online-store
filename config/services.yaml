@@ -4,12 +4,15 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    cookie_guest_name: 'guest_uuid' 
-    cookie_guest_time: 604800 # 3600 * 24 * 7; 
+    cookie_guest_name: 'guest_uuid'
+    cookie_guest_time: 604800 # 3600 * 24 * 7;
     uploads_dir: '%kernel.project_dir%/public/uploads'
     uploads_temp_dir: '%uploads_dir%/temp'
     uploads_images_dir: '%uploads_dir%/images'
     product_images_dir: '%uploads_images_dir%/products'
+    locale: 'en'
+    app_locales: en|ru
+    app_locales.in_brackets: '(%app_locales%)'
 
 services:
     # default configuration for services in *this* file
@@ -19,6 +22,7 @@ services:
         bind:
             string $uploadsTempDir: '%uploads_temp_dir%'
             string $productImagesDir: '%product_images_dir%'
+            string $defaultLocale: '%locale%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

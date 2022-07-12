@@ -81,6 +81,15 @@
             "./config/packages/nelmio_cors.yaml"
         ]
     },
+    "php-translation/symfony-bundle": {
+        "version": "0.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.10",
+            "ref": "f3ca4e4da63897d177e58da78626c20648c0e102"
+        }
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {
