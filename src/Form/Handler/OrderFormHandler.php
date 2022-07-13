@@ -47,6 +47,7 @@ class OrderFormHandler
         $alias = "o";
         $qb = $this->orderManager->getRepository()
             ->createQueryBuilder($alias)
+            ->leftJoin("{$alias}.owner", "u")
             ->where("{$alias}.isDeleted = :isDeleted")
             ->setParameter("isDeleted", false)
         ;
