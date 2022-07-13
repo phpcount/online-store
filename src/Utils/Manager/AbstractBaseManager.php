@@ -3,6 +3,7 @@
 namespace App\Utils\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ObjectRepository;
 
 abstract class AbstractBaseManager
@@ -21,6 +22,15 @@ abstract class AbstractBaseManager
 
     /**
      *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilder(): QueryBuilder
+    {
+        return $this->em->createQueryBuilder();
+    }
+
+    /**
+     *
      * @return ObjectRepository
      */
     abstract public function getRepository(): ObjectRepository;
@@ -34,7 +44,7 @@ abstract class AbstractBaseManager
     {
         return $this->getRepository()->find($id);
     }
-    
+
     /**
      *
      * @param object $entity
@@ -48,7 +58,7 @@ abstract class AbstractBaseManager
         $this->em->persist($entity);
         $this->em->flush();
     }
-   
+
     /**
      *
      * @param object $entity
@@ -62,7 +72,7 @@ abstract class AbstractBaseManager
         } else {
             $this->em->remove($entity);
         }
-        
+
         if ($withFlush)
             $this->em->flush();
     }

@@ -4,6 +4,8 @@ namespace App\Form\Handler;
 
 use App\Entity\Order;
 use App\Utils\Manager\OrderManager;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class OrderFormHandler
 {
@@ -14,9 +16,16 @@ class OrderFormHandler
      */
     private $orderManager;
 
-    public function __construct(OrderManager $orderManager)
+    /**
+     *
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(OrderManager $orderManager, PaginatorInterface $paginator)
     {
        $this->orderManager = $orderManager;
+       $this->paginator = $paginator;
     }
 
     /**
@@ -31,5 +40,22 @@ class OrderFormHandler
         $this->orderManager->save($order);
 
         return $order;
+    }
+
+    public function processOrderFiltersForm(Request $request, $filterForm)
+    {
+        $alias = "o";
+        $qb = $this->orderManager->getRepository()
+            ->createQueryBuilder($alias)
+            ->where("{$alias}.isDeleted = :isDeleted")
+            ->setParameter("isDeleted", false)
+        ;
+
+        return $this->paginator->paginate(
+            $qb->getQuery(),
+            $request->query->getInt('page', 1)
+        );
+
+
     }
 }

@@ -3,11 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Order;
-use App\Entity\OrderProduct;
 use App\Entity\StaticStorage\OrderStaticStorage;
 use App\Form\Admin\EditOrderFormType;
 use App\Form\Handler\OrderFormHandler;
-use App\Repository\OrderRepository;
 use App\Utils\Manager\OrderManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +20,15 @@ class OrderController extends AbstractController
     /**
      * @Route("/list", name="list")
      */
-    public function list(OrderRepository $orderRepository): Response
+    public function list(Request $request, OrderFormHandler $orderFormHandler): Response
     {
-        $orders = $orderRepository->findBy(['isDeleted' => false], ['id' => 'DESC']);
+        $filterForm = null;
+
+        $pagination = $orderFormHandler->processOrderFiltersForm($request, $filterForm);
+
         $orderStatusChoices = OrderStaticStorage::getOrderStatusChoices();
 
-        return $this->render('admin/order/list.html.twig', compact('orders', 'orderStatusChoices'));
+        return $this->render('admin/order/list.html.twig', compact('pagination', 'orderStatusChoices'));
     }
 
     /**
@@ -39,7 +40,7 @@ class OrderController extends AbstractController
         if (!$order) {
             $order = new Order();
         }
-       
+
         $form = $this->createForm(EditOrderFormType::class, $order);
         $form->handleRequest($request);
 
@@ -69,7 +70,7 @@ class OrderController extends AbstractController
         $orderManager->remove($order, true);
 
         $this->addFlash('info', sprintf('The order from %s was successfully deleted.', $date));
-        
+
         return $this->redirectToRoute('admin_order_list');
     }
 }
