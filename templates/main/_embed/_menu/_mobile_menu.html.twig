@@ -5,46 +5,13 @@
     </button>
     <nav class="mobile-nav">
         <ul class="mobile-menu">
-            <li class="menu-item">
-                {% set catJeans = 'Jeans' %}
-                <a href="{{ path('main_category_show', {slug: catJeans|lower}) }}">
-                    <div>{{ catJeans }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catHats = 'Hats' %}
-                <a href="{{ path('main_category_show', {slug: catHats|lower}) }}">
-                    <div>{{ catHats }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catJackets = 'Jackets' %}
-                <a href="{{ path('main_category_show', {slug: catJackets|lower}) }}">
-                    <div>{{ catJackets }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catDresses = 'Dresses' %}
-                <a href="{{ path('main_category_show', {slug: catDresses|lower}) }}">
-                    <div>{{ catDresses }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catSneakers = 'Sneakers' %}
-                <a href="{{ path('main_category_show', {slug: catSneakers|lower}) }}">
-                    <div>{{ catSneakers }}</div>
-                </a>
-            </li>
-            <li class="menu-item font-weight-bold">
-                <a href="{{ path('main_login') }}">
-                    <div>Login</div>
-                </a>
-            </li>
-            <li class="menu-item font-weight-bold">
-                <a href="{{ path('main_cart_show') }}">
-                    <div>Cart</div>
-                </a>
-            </li>
+            {% include 'main/_embed/_menu/_menu_categories.html.twig' %}
+
+            {% include 'main/_embed/_menu/_menu_item.html.twig' with {
+                targetRoot: 'main_cart_show',
+                label: 'Cart',
+                extraClasses: 'font-weight-bold'
+            } %}
         </ul>
     </nav>
 </div>

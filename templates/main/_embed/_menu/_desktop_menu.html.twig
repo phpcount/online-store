@@ -8,42 +8,21 @@
     </a>
     <nav class="main-nav">
         <ul class="menu">
-            <li class="menu-item">
-                {% set catJeans = 'Jeans' %}
-                <a href="{{ path('main_category_show', {slug: catJeans|lower}) }}">
-                    <div>{{ catJeans }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catHats = 'Hats' %}
-                <a href="{{ path('main_category_show', {slug: catHats|lower}) }}">
-                    <div>{{ catHats }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catJackets = 'Jackets' %}
-                <a href="{{ path('main_category_show', {slug: catJackets|lower}) }}">
-                    <div>{{ catJackets }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catDresses = 'Dresses' %}
-                <a href="{{ path('main_category_show', {slug: catDresses|lower}) }}">
-                    <div>{{ catDresses }}</div>
-                </a>
-            </li>
-            <li class="menu-item">
-                {% set catSneakers = 'Sneakers' %}
-                <a href="{{ path('main_category_show', {slug: catSneakers|lower}) }}">
-                    <div>{{ catSneakers }}</div>
-                </a>
-            </li>
+            {% include 'main/_embed/_menu/_menu_categories.html.twig' %}
 
-            <li class="menu-item font-weight-bold">
-                <a href="{{ path('main_login') }}">
-                    <div>Login</div>
-                </a>
-            </li>
+            {% if app.user %}
+                {% include 'main/_embed/_menu/_menu_item.html.twig' with {
+                    targetRoot: 'main_profile_index',
+                    label: 'Main profile',
+                    extraClasses: 'font-weight-bold'
+                } %}
+            {% else %}
+                {% include 'main/_embed/_menu/_menu_item.html.twig' with {
+                    targetRoot: 'main_login',
+                    label: 'Login',
+                    extraClasses: 'font-weight-bold'
+                } %}
+            {% endif %}
         </ul>
     </nav>
 

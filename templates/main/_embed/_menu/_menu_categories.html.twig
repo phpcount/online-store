@@ -1,0 +1,24 @@
+{% set tmplItem = 'main/_embed/_menu/_menu_item.html.twig' %}
+{% set targetRoot = 'main_category_show' %}
+
+{% include tmplItem with {
+    targetRoot,
+    slug: 'jeans',
+    label: 'Jeans'
+} %}
+{% include tmplItem with {
+    targetRoot,
+    label: 'Hats'
+} %}
+{% include tmplItem with {
+    targetRoot,
+    label: 'Jackets'
+} %}
+{% include tmplItem with {
+    targetRoot,
+    label: 'Dresses'
+} %}
+{% include tmplItem with {
+    targetRoot,
+    label: 'Sneakers'
+} %}
