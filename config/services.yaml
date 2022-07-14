@@ -15,6 +15,10 @@ parameters:
     app_locales.in_brackets: '(%app_locales%)'
     router.request_context.scheme: '%env(SITE_BASE_SCHEME)%'
     router.request_context.host: '%env(SITE_BASE_HOST)%'
+    admin:
+        pages:
+            orders:
+                limit: 10
 
 services:
     # default configuration for services in *this* file

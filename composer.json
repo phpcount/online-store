@@ -16,6 +16,7 @@
         "knplabs/knp-paginator-bundle": "^5.8",
         "knpuniversity/oauth2-client-bundle": "2.7",
         "league/oauth2-google": "^4.0",
+        "lexik/form-filter-bundle": "^7.0",
         "nelmio/cors-bundle": "^2.2",
         "php-translation/symfony-bundle": "^0.12.6",
         "phpdocumentor/reflection-docblock": "^5.3",

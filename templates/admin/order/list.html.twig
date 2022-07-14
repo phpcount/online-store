@@ -4,6 +4,9 @@
 {% block title_detailed %}All {{ title }}{% endblock %}
 
 {% block body %}
+    {% include "admin/order/_embed/table_filtration.html.twig" with {
+        'form': filterForm
+    } %}
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             {% include 'admin/_embed/_card/_header_action.html.twig' with {
@@ -59,4 +62,27 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        const filterVisibilityBtnEl = document.getElementById('order_list_filters_btn');
+        const filterVisibilityBlockEl = document.getElementById('order_list_filters_block');
+        const filterSection = 'order_list'
+
+
+        window.onload = () => {
+            changeFiltersBlockVisibility(filterSection, filterVisibilityBlockEl);
+
+            filterVisibilityBtnEl.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                toggleFiltersVisibility(filterSection);
+
+                changeFiltersBlockVisibility(filterSection, filterVisibilityBlockEl);
+            }
+        }
+    </script>
 {% endblock %}

@@ -5,6 +5,8 @@ namespace App\Form\Handler;
 use App\Entity\Order;
 use App\Utils\Manager\OrderManager;
 use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderFormHandler
@@ -22,10 +24,17 @@ class OrderFormHandler
      */
     private $paginator;
 
-    public function __construct(OrderManager $orderManager, PaginatorInterface $paginator)
+    /**
+     *
+     * @var FilterBuilderUpdater
+     */
+    private $filterBuilderUpdater;
+
+    public function __construct(OrderManager $orderManager, PaginatorInterface $paginator, FilterBuilderUpdater $filterBuilderUpdater)
     {
        $this->orderManager = $orderManager;
        $this->paginator = $paginator;
+       $this->filterBuilderUpdater = $filterBuilderUpdater;
     }
 
     /**
@@ -42,7 +51,7 @@ class OrderFormHandler
         return $order;
     }
 
-    public function processOrderFiltersForm(Request $request, $filterForm)
+    public function processOrderFiltersForm(Request $request, FormInterface $filterForm, $limit = 10)
     {
         $alias = "o";
         $qb = $this->orderManager->getRepository()
@@ -52,9 +61,14 @@ class OrderFormHandler
             ->setParameter("isDeleted", false)
         ;
 
+        if ($filterForm->isSubmitted()) {
+            $this->filterBuilderUpdater->addFilterConditions($filterForm, $qb);
+        }
+
         return $this->paginator->paginate(
             $qb->getQuery(),
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
+            $limit
         );
 
 

@@ -11,7 +11,7 @@
     {{ encore_entry_link_tags('section-admin') }}
     {% block stylesheets %}{% endblock %}
 </head>
-
+    {% set ROUTE_NAME = app.request.attributes.get('_route') %}
     {% block layout_body %}{% endblock %}
     {{ encore_entry_script_tags('section-admin') }}
 </html>
