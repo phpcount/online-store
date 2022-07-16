@@ -1,0 +1,26 @@
+App\Entity\User:
+    user_1:
+        email: 'user@test.com'
+        # qwerty | add "\" before "$"
+        password: '\$2y\$13\$2YZia4CkysigWqKS6IIHCOB/mFJE1XIv860h2y2eqFMRR6TuHvMPC'
+        fullName: <name()>
+        address: <address()>
+        zipcode: <postcode()>
+        isVerified: true
+        roles: ["ROLE_USER"]
+    user_2:
+        email: 'admin@test.com'
+        # qwerty | add "\" before "$"
+        password: '\$2y\$13\$3tYGP4D4AL4qgf.vPSlCDORtB2/gtKEXYrtX2IonVD1foTMhm0ByK'
+        fullName: <name()>
+        address: <address()>
+        isVerified: true
+        roles: ["ROLE_ADMIN"]
+    user_3:
+        email: 'super_admin@test.com'
+        # 123456 | add "\" before "$"
+        password: '\$2y\$13$.Pjj1NfdBCfVr8J4v5iiG.3dnAYrkWRZ1sc6BSrIcxptc0dDu3Tw2'
+        fullName: <name()>
+        address: <address()>
+        isVerified: true
+        roles: ["ROLE_SUPER_ADMIN"]

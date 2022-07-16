@@ -1,0 +1,9 @@
+App\Entity\Order:
+    order_{1..2}:
+        owner: '@user_1'
+        totalPrice: 120
+        status: <numberBetween(0, 2)>
+    order_3:
+        owner: '@user_2'
+        totalPrice: 400
+        status: <numberBetween(0, 2)>

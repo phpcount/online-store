@@ -1,0 +1,7 @@
+App\Entity\Product:
+    product_sneakers_{1..5}:
+        title: <name()>
+        price: <randomFloat(2, 5.00, 1000.00)>
+        quantity: <numberBetween(2, 10)>
+        category: '@category_sneakers'
+        isPublished: <numberBetween(0, 1)>

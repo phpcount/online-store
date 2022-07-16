@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route({ "en": "/registartion", "ru": "/регитсрация" }, name="main_registration")
+     * @Route({ "en": "/registration", "ru": "/регитсрация" }, name="main_registration")
      */
     public function registration(Request $request, UserManager $userManager, MessageBusInterface $messageBus): Response
     {
@@ -78,7 +78,7 @@ class RegistrationController extends AbstractController
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            $this->emailVerifier->handleEmailConfirmation($request, $user);
+            $this->emailVerifier->handleEmailConfirmation($request->getUri(), $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('warning', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
