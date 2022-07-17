@@ -46,7 +46,6 @@ class ProductRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-    
 
     // /**
     //  * @return Product[] Returns an array of Product objects

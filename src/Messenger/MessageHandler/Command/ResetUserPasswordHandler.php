@@ -2,31 +2,27 @@
 
 namespace App\Messenger\MessageHandler\Command;
 
-use App\Utils\Manager\UserManager;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use App\Entity\User;
 use App\Messenger\Message\Command\ResetUserPasswordEvent;
 use App\Utils\Mailer\Sender\ResetUserPasswordEmailSender;
+use App\Utils\Manager\UserManager;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 class ResetUserPasswordHandler implements MessageHandlerInterface
 {
-
     /**
-     *
      * @var ResetPasswordHelperInterface
      */
     private $resetPasswordHelper;
 
     /**
-     *
      * @var UserManager
      */
     private $userManager;
 
     /**
-     *
      * @var ResetUserPasswordEmailSender
      */
     private $emailSender;
@@ -52,10 +48,8 @@ class ResetUserPasswordHandler implements MessageHandlerInterface
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $ex) {
-            //
         }
 
         $this->emailSender->sendEmailToClient($user, $resetToken);
     }
-
 }

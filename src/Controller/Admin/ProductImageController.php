@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProductImageController extends AbstractController
 {
-
     /**
      * @Route("/delete/{id}", methods="GET|DELETE", name="delete")
      */

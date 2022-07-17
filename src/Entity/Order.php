@@ -2,20 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource as Api;
 use App\Repository\OrderRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource as Api;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
  * @ORM\Table(name="`order`")
- * 
+ *
  * @Api(
- *      collectionOperations={ 
+ *      collectionOperations={
  *          "get"={
  *                  "normalization_context"={"groups"="order:list"}
  *                },
@@ -37,7 +37,7 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"order:item"})
      */
     private $id;
@@ -55,7 +55,7 @@ class Order
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"order:item"})
      */
     private $status;
@@ -67,7 +67,7 @@ class Order
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * 
+     *
      * @Groups({"order:item"})
      */
     private $updatedAt;
@@ -79,7 +79,7 @@ class Order
 
     /**
      * @ORM\OneToMany(targetEntity=OrderProduct::class, mappedBy="appOrder")
-     * 
+     *
      * @Groups({"order:item"})
      */
     private $orderProducts;
@@ -97,12 +97,12 @@ class Order
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -145,12 +145,12 @@ class Order
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(?DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

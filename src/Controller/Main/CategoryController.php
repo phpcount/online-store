@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
     public function show(Category $category = null): Response
     {
         if (!$category) {
-            throw new NotFoundHttpException("Category not found");
+            throw new NotFoundHttpException('Category not found');
         }
 
         $products = $category->getProducts()->getValues();

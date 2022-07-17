@@ -25,23 +25,23 @@ class EditUserFormType extends AbstractType
         /** @var User $user */
         $user = $options['data'];
         $isNewUser = is_null($user->getId());
-        
+
         $builder
             ->add('plainPassword', TextType::class, [
                 'label' => 'New password',
                 'required' => $isNewUser,
                 'mapped' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
                 'constraints' => [
                     new Length([
                         'min' => 6,
-                        'minMessage' => "Your password must be at least {{ limit }} characters long",
+                        'minMessage' => 'Your password must be at least {{ limit }} characters long',
                     ]),
                     // new Regex('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])/', 'Current password is not valid')
                     // new UserPassword() // it's old password
-                ]
+                ],
             ])
             ->add('roles', ChoiceType::class, [
                 'label' => 'Roles',
@@ -49,59 +49,59 @@ class EditUserFormType extends AbstractType
                 'choices' => array_flip(UserStaticStorage::getUserRolesChoices()),
                 'multiple' => true,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
             ])
             ->add('isVerified', CheckboxType::class, [
                 'label' => 'Is verified',
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-check-input'
+                    'class' => 'form-check-input',
                 ],
                 'label_attr' => [
-                    'class' => 'form-check-label'
-                ]
+                    'class' => 'form-check-label',
+                ],
             ])
             ->add('fullName', TextType::class, [
                 'label' => 'Full name',
                 'required' => true,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
                 'constraints' => [
-                    new NotBlank(null, 'Should be filled')
-                ]
+                    new NotBlank(null, 'Should be filled'),
+                ],
             ])
             ->add('phone', TextType::class, [
                 'label' => 'Phone',
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control'
-                ]
+                    'class' => 'form-control',
+                ],
             ])
             ->add('address', TextareaType::class, [
                 'label' => 'Address',
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control'
-                ]
+                    'class' => 'form-control',
+                ],
             ])
             ->add('zipcode', TextType::class, [
                 'label' => 'Zip code',
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-control'
-                ]
+                    'class' => 'form-control',
+                ],
             ])
             ->add('isDeleted', CheckboxType::class, [
                 'label' => 'Is deleted',
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-check-input'
+                    'class' => 'form-check-input',
                 ],
                 'label_attr' => [
-                    'class' => 'form-check-label'
-                ]
+                    'class' => 'form-check-label',
+                ],
             ])
         ;
 
@@ -111,13 +111,13 @@ class EditUserFormType extends AbstractType
                     'label' => 'Email',
                     'required' => true,
                     'attr' => [
-                        'class' => 'form-control'
+                        'class' => 'form-control',
                     ],
                     'constraints' => [
                         new Email([
                             'message' => 'Email is not valid',
-                            'mode' => 'html5'
-                        ])
+                            'mode' => 'html5',
+                        ]),
                     ],
                 ]);
         }

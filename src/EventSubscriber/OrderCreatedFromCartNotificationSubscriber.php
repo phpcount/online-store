@@ -8,9 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class OrderCreatedFromCartNotificationSubscriber implements EventSubscriberInterface
 {
-
     /**
-     *
      * @var OrderCreatedFromCartEmailSender
      */
     private $orderCreatedFromCartEmailSender;
@@ -28,7 +26,6 @@ class OrderCreatedFromCartNotificationSubscriber implements EventSubscriberInter
         $this->orderCreatedFromCartEmailSender->sendEmailToClient($order);
         $this->orderCreatedFromCartEmailSender->sendEmailToManager($order);
     }
-
 
     public static function getSubscribedEvents(): array
     {

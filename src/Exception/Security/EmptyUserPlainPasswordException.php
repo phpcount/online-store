@@ -6,5 +6,4 @@ use Symfony\Component\Security\Core\Exception\InvalidArgumentException;
 
 class EmptyUserPlainPasswordException extends InvalidArgumentException
 {
-
 }

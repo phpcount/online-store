@@ -4,8 +4,8 @@ namespace App\Command;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -76,7 +76,7 @@ class AddUserCommand extends Command
         }
 
         $successMessage = sprintf(
-            "%s was successfully created: %s",
+            '%s was successfully created: %s',
             in_array($role, ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']) ? 'Administrator user' : 'User',
             $email
         );
@@ -84,7 +84,7 @@ class AddUserCommand extends Command
 
         $event = $stopwatch->stop('add-user-command');
 
-        $stopwatchMessage =  sprintf(
+        $stopwatchMessage = sprintf(
             'New user\'s id: %d / Elapsed time: %.2f ms / Consumed memory:  %.2f MB',
             $user->getId(),
             $event->getDuration(),
@@ -96,14 +96,9 @@ class AddUserCommand extends Command
     }
 
     /**
-     * Undocumented function
-     *
-     * @param string $email
-     * @param string $password
-     * @param string $role
-     * @return User
+     * Undocumented function.
      */
-    private function createUser(string $email,  string $password, string $role): User
+    private function createUser(string $email, string $password, string $role): User
     {
         $existingUser = $this->userRepository->findOneBy(['email' => $email]);
         if ($existingUser) {
@@ -124,5 +119,4 @@ class AddUserCommand extends Command
 
         return $user;
     }
-
 }

@@ -5,16 +5,13 @@ namespace App\Controller\Main;
 use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Uid\Uuid;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
 class DefaultController extends AbstractController
 {
-
     public function getEm()
     {
         return $this->getDoctrine()->getManager();
@@ -32,7 +29,7 @@ class DefaultController extends AbstractController
         $cookieGuestName = $this->getParameter('cookie_guest_name');
         if (!$request->cookies->has($cookieGuestName)) {
             $expires = time() + $this->getParameter('cookie_guest_time');
-            $cookie = Cookie::create($this->getParameter('cookie_guest_name'), Uuid::v4(),  $expires);
+            $cookie = Cookie::create($this->getParameter('cookie_guest_name'), Uuid::v4(), $expires);
             $response->headers->setCookie($cookie);
         }
 
@@ -84,7 +81,7 @@ class DefaultController extends AbstractController
 
     //         return $this->redirectToRoute('product_edit', [ 'id' => $product->getId() ]);
     //     }
-    
+
     //     // dd($product, $form);
     //     return $this->render('main/default/edit_product.html.twig', [
     //         'form' => $form->createView()

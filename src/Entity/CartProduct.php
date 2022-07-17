@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource as Api;
 use App\Repository\CartProductRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource as Api;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CartProductRepository::class)
- * 
+ *
  * @Api(
- *      collectionOperations={ 
+ *      collectionOperations={
  *          "get"={
  *                  "normalization_context"={"groups"="cart_product:list"}
  *                },
@@ -35,7 +35,7 @@ class CartProduct
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $id;
@@ -43,7 +43,7 @@ class CartProduct
     /**
      * @ORM\ManyToOne(targetEntity=Cart::class, inversedBy="cartProducts")
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      * @Groups({"cart_product:list", "cart_product:item"})
      */
     private $cart;
@@ -51,14 +51,14 @@ class CartProduct
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="cartProducts")
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      * @Groups({"cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $product;
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $quantity;

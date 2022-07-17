@@ -11,17 +11,14 @@ use SymfonyCasts\Bundle\VerifyEmail\Model\VerifyEmailSignatureComponents;
 class UserRegisteredEmailSender
 {
     /**
-     *
      * @var MailerSender
      */
     private $mailerSender;
 
     /**
-     *
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
-
 
     public function __construct(MailerSender $mailerSender, UrlGeneratorInterface $urlGenerator)
     {
@@ -39,9 +36,8 @@ class UserRegisteredEmailSender
             'expiresAtMessageData' => $signatureComponents->getExpirationMessageData(),
             'h1Title' => $subject,
             'user' => $user,
-            'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL)
+            'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ];
-
 
         $mailerOptions = new MailerOptions();
         $mailerOptions
@@ -53,5 +49,4 @@ class UserRegisteredEmailSender
 
         $this->mailerSender->sendTemplatedEmail($mailerOptions);
     }
-
 }

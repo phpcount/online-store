@@ -2,11 +2,8 @@
 
 namespace App\Utils\Manager;
 
-use Doctrine\Persistence\ObjectRepository;
-use App\Utils\Manager\AbstractBaseManager;
 use App\Entity\Category;
-
-
+use Doctrine\Persistence\ObjectRepository;
 
 class CategoryManager extends AbstractBaseManager
 {
@@ -16,17 +13,18 @@ class CategoryManager extends AbstractBaseManager
     }
 
     /**
-     *
      * @param Category $entity
+     *
      * @return void
      */
     public function remove(object $entity, $withFlush = false)
     {
-        if(!$entity->getProducts()->isEmpty())
+        if (!$entity->getProducts()->isEmpty()) {
             foreach ($entity->getProducts()->getValues() as $product) {
                 parent::remove($product);
             }
-        
+        }
+
         parent::remove($entity, $withFlush);
     }
 }

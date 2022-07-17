@@ -6,9 +6,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class FilesystemWorker
 {
-
     /**
-     *
      * @var Filesystem
      */
     private $filesystem;
@@ -19,22 +17,15 @@ class FilesystemWorker
     }
 
     /**
-     *
-     * @param string $folder
      * @return void
      */
     public function createFolderIfItNotExists(string $folder)
     {
-        if(!$this->filesystem->exists($folder)) {
+        if (!$this->filesystem->exists($folder)) {
             $this->filesystem->mkdir($folder);
         }
     }
 
-    /**
-     *
-     * @param string $file
-     * @return self
-     */
     public function remove(string $file): self
     {
         if ($this->filesystem->exists($file)) {

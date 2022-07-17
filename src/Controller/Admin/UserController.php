@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\StaticStorage\UserStaticStorage;
 use App\Entity\User;
 use App\Form\EditUserFormType;
 use App\Form\Handler\UserFormHandler;
@@ -18,7 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends AbstractController
 {
-
     /**
      * @Route("/list", name="list")
      */
@@ -46,6 +44,7 @@ class UserController extends AbstractController
             $userFormHandler->processEditForm($form);
 
             $this->addFlash('success', 'Your changes were saved!');
+
             return $this->redirectToRoute('admin_user_edit', ['id' => $user->getId()]);
         }
 
@@ -55,7 +54,7 @@ class UserController extends AbstractController
 
         return $this->render('admin/user/edit.html.twig', [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -65,12 +64,11 @@ class UserController extends AbstractController
     public function delete(User $user = null, UserManager $userManager): Response
     {
         $email = $user->getEmail();
-        
+
         $userManager->remove($user, true);
 
         $this->addFlash('info', sprintf('The user: "%s" was successfully deleted.', $email));
-        
+
         return $this->redirectToRoute('admin_user_list');
     }
 }
-

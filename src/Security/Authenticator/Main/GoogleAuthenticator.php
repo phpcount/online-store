@@ -6,9 +6,9 @@ use App\Event\UserLoggedSocialNetEvent;
 use App\Utils\Factory\UserFactory;
 use App\Utils\Generator\PasswordGenerator;
 use App\Utils\Manager\UserManager;
-use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
-use KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\GoogleClient;
+use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use League\OAuth2\Client\Provider\GoogleUser;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,35 +23,29 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class GoogleAuthenticator extends SocialAuthenticator
 {
     /**
-     *
      * @var ClientRegistry
      */
     private $clientRegistry;
 
     /**
-     *
      * @var UserManager
      */
     private $userManager;
 
     /**
-     *
      * @var RouterInterface
      */
     private $router;
 
     /**
-     *
      * @var Session
      */
     private $session;
 
     /**
-     *
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
-
 
     public function __construct(ClientRegistry $clientRegistry, UserManager $userManager, RouterInterface $router, EventDispatcherInterface $eventDispatcher)
     {
@@ -65,7 +59,7 @@ class GoogleAuthenticator extends SocialAuthenticator
     public function supports(Request $request)
     {
         // continue ONLY if the current ROUTE matches the check ROUTE
-        return $request->attributes->get('_route') === 'connect_google_check';
+        return 'connect_google_check' === $request->attributes->get('_route');
     }
 
     public function getCredentials(Request $request)
@@ -89,17 +83,17 @@ class GoogleAuthenticator extends SocialAuthenticator
         $email = $googleUser->getEmail();
 
         $existingUser = $this->userManager->getRepository()->findOneBy([
-            'googleId' => $googleUser->getId()
+            'googleId' => $googleUser->getId(),
         ]);
         if ($existingUser) {
             return $existingUser;
         }
 
         $user = $this->userManager->getRepository()->findOneBy([
-            'email' => $email
+            'email' => $email,
         ]);
 
-        if(!$user) {
+        if (!$user) {
             $user = UserFactory::creteUserFromGoogleAccount($googleUser);
 
             $plainPassword = PasswordGenerator::generatePassword();
@@ -157,5 +151,4 @@ class GoogleAuthenticator extends SocialAuthenticator
             Response::HTTP_TEMPORARY_REDIRECT
         );
     }
-
 }

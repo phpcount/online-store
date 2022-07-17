@@ -25,6 +25,4 @@ class ProductController extends AbstractController
 
         return $this->render('main/product/show.html.twig', compact('product'));
     }
-
-
 }

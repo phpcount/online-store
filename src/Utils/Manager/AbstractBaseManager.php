@@ -8,9 +8,7 @@ use Doctrine\Persistence\ObjectRepository;
 
 abstract class AbstractBaseManager
 {
-
     /**
-     *
      * @var EntityManagerInterface
      */
     protected $em;
@@ -20,34 +18,19 @@ abstract class AbstractBaseManager
         $this->em = $em;
     }
 
-    /**
-     *
-     * @return QueryBuilder
-     */
     public function createQueryBuilder(): QueryBuilder
     {
         return $this->em->createQueryBuilder();
     }
 
-    /**
-     *
-     * @return ObjectRepository
-     */
     abstract public function getRepository(): ObjectRepository;
 
-    /**
-     *
-     * @param string $id
-     * @return object|null
-     */
     public function find(string $id): ?object
     {
         return $this->getRepository()->find($id);
     }
 
     /**
-     *
-     * @param object $entity
      * @return void
      */
     public function save(object $entity)
@@ -60,9 +43,8 @@ abstract class AbstractBaseManager
     }
 
     /**
+     * @param bool $withFlush
      *
-     * @param object $entity
-     * @param boolean $withFlush
      * @return void
      */
     public function remove(object $entity, $withFlush = false)
@@ -73,7 +55,8 @@ abstract class AbstractBaseManager
             $this->em->remove($entity);
         }
 
-        if ($withFlush)
+        if ($withFlush) {
             $this->em->flush();
+        }
     }
 }

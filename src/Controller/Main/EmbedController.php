@@ -2,7 +2,6 @@
 
 namespace App\Controller\Main;
 
-use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +16,11 @@ class EmbedController extends AbstractController
             $criteria['category'] = $categoryId;
         }
 
-        $products = $productRepository->findBy($criteria,  ['id' => 'DESC'], $productCount);
-        
-        while($resultShuffle)
+        $products = $productRepository->findBy($criteria, ['id' => 'DESC'], $productCount);
+
+        while ($resultShuffle) {
             $resultShuffle = !shuffle($products);
+        }
 
         return $this->render('main/_embed/_similar_products.html.twig', compact('products'));
     }

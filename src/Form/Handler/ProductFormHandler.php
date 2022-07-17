@@ -6,20 +6,16 @@ use App\Entity\Product;
 use App\Form\DTO\EditProductModel;
 use App\Utils\File\FileSaver;
 use App\Utils\Manager\ProductManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Form;
 
 class ProductFormHandler
 {
-
     /**
-     *
      * @var ProductManager
      */
     private $productManager;
 
     /**
-     *
      * @var FileSaver
      */
     private $fileSaver;
@@ -30,23 +26,15 @@ class ProductFormHandler
         $this->fileSaver = $fileSaver;
     }
 
-    /**
-     *
-     * @param EditProductModel $editProductModel
-     * @param Form $form
-     * @return Product
-     */
     public function processEditForm(EditProductModel $editProductModel, Form $form): Product
     {
         // TODO: ADD A NEW IMAGE WITH DIFFERENT SIZES TO THE PRODUCT
         // 1. Save product's changes (+)
-        
 
         // 2. Save uploaded file into temp folder (+)
 
         // 3. Work with Product (addProductImage) and ProductImage
         // 3.1 Get path of folder with images of product (+)
-
 
         // 3.2 Work with ProductImage
         // 3.2.1 Resize and save image into folder (BIG, MIDDLE, SMALL) (+)
@@ -66,8 +54,8 @@ class ProductFormHandler
         $tempImageFileName = $newImageFile
             ? $this->fileSaver->saveUploadedFileIntoTemp($newImageFile)
             : null;
-        
-        if ($product->getTitle() && $product->getId() === null) {
+
+        if ($product->getTitle() && null === $product->getId()) {
             $this->productManager->save($product); // fix
         }
 

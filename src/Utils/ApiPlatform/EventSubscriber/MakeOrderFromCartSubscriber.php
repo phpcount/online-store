@@ -5,32 +5,29 @@ namespace App\Utils\ApiPlatform\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Order;
 use App\Event\OrderCreatedFromCartEvent;
+use App\Utils\Helpers\JsonHandler;
 use App\Utils\Manager\OrderManager;
+use Exception;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Security;
-use App\Utils\Helpers\JsonHandler;
-use Exception;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class MakeOrderFromCartSubscriber implements EventSubscriberInterface
 {
     /**
-     *
      * @var Security
      */
     private $security;
 
     /**
-     *
      * @var OrderManager
      */
     private $orderManager;
 
     /**
-     *
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
@@ -51,9 +48,9 @@ class MakeOrderFromCartSubscriber implements EventSubscriberInterface
     {
         return [
             KernelEvents::VIEW => [
-                [ 'makeOrder', EventPriorities::PRE_WRITE ],
-                [ 'sendNotificationsAboutNewOrder', EventPriorities::POST_WRITE ]
-            ]
+                ['makeOrder', EventPriorities::PRE_WRITE],
+                ['sendNotificationsAboutNewOrder', EventPriorities::POST_WRITE],
+            ],
         ];
     }
 
@@ -91,5 +88,4 @@ class MakeOrderFromCartSubscriber implements EventSubscriberInterface
         $event = new OrderCreatedFromCartEvent($order);
         $this->eventDispatcher->dispatch($event);
     }
-
 }

@@ -9,15 +9,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserLoggedSocialNetEmailSender
 {
-
     /**
-     *
      * @var MailerSender
      */
     private $mailerSender;
 
     /**
-     *
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
@@ -27,8 +24,6 @@ class UserLoggedSocialNetEmailSender
         $this->mailerSender = $mailerSender;
         $this->urlGenerator = $urlGenerator;
     }
-
-
 
     public function sendEmailToClient(User $user, string $plainPassword)
     {
@@ -43,7 +38,7 @@ class UserLoggedSocialNetEmailSender
                 'user' => $user,
                 'plainPassword' => $plainPassword,
                 'h1Title' => $subject,
-                'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL)
+                'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL),
             ])
         ;
 

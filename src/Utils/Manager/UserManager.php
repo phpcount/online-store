@@ -2,17 +2,15 @@
 
 namespace App\Utils\Manager;
 
-use Doctrine\Persistence\ObjectRepository;
-use App\Utils\Manager\AbstractBaseManager;
 use App\Entity\User;
 use App\Exception\Security\EmptyUserPlainPasswordException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserManager extends AbstractBaseManager
 {
     /**
-     *
      * @var UserPasswordHasherInterface
      */
     private $userPasswordHasher;
@@ -25,9 +23,6 @@ class UserManager extends AbstractBaseManager
     }
 
     /**
-     *
-     * @param User $user
-     * @param string $plainPassword
      * @return void
      */
     public function hashPassword(User $user, string $plainPassword)
@@ -46,5 +41,4 @@ class UserManager extends AbstractBaseManager
     {
         return $this->em->getRepository(User::class);
     }
-
 }

@@ -2,18 +2,18 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource as Api;
 use App\Repository\CartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource as Api;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CartRepository::class)
- * 
+ *
  * @Api(
- *      collectionOperations={ 
+ *      collectionOperations={
  *          "get"={
  *                  "normalization_context"={"groups"="cart:list"}
  *                },
@@ -36,14 +36,14 @@ class Cart
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"cart:list", "cart:item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     *
      * @Groups({"cart:list", "cart:item"})
      */
     private $sessionId;
@@ -55,7 +55,7 @@ class Cart
 
     /**
      * @ORM\OneToMany(targetEntity=CartProduct::class, mappedBy="cart", orphanRemoval=true)
-     * 
+     *
      * @Groups({"cart:list", "cart:item"})
      */
     private $cartProducts;

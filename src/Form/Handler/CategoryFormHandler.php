@@ -8,22 +8,16 @@ use App\Utils\Manager\CategoryManager;
 
 class CategoryFormHandler
 {
-
     /**
-     *
      * @var CategoryManager
      */
     private $categoryManager;
 
     public function __construct(CategoryManager $categoryManager)
     {
-       $this->categoryManager = $categoryManager;
+        $this->categoryManager = $categoryManager;
     }
 
-    /**
-     *
-     * @return Category
-     */
     public function processEditForm(EditCategoryModel $editCategoryModel): Category
     {
         $category = new Category();

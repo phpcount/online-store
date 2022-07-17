@@ -9,35 +9,27 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFormHandler
 {
-
     /**
-     *
      * @var UserManager
      */
     private $userManager;
 
     /**
-     *
      * @var UserPasswordHasherInterface
      */
     private $userPasswordHasher;
 
     public function __construct(UserManager $userManager, UserPasswordHasherInterface $userPasswordHasher)
     {
-       $this->userManager = $userManager;
-       $this->userPasswordHasher = $userPasswordHasher;
+        $this->userManager = $userManager;
+        $this->userPasswordHasher = $userPasswordHasher;
     }
 
-    /**
-     *
-     * @param Form $form
-     * @return User
-     */
     public function processEditForm(Form $form): User
     {
         /** @var User $user */
         $user = $form->getData();
-    
+
         $plainPassword = $form->get('plainPassword')->getData();
 
         if ($plainPassword) {

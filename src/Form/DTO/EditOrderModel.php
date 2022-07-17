@@ -8,39 +8,33 @@ use App\Entity\User;
 class EditOrderModel
 {
     /**
-     *
      * @var int
      */
     public $id;
 
     /**
-     *
      * @var User
      */
     public $owner;
 
     /**
-     *
      * @var int
      */
     public $status;
 
     /**
-     *
      * @var float
      */
     public $totalPrice;
 
     /**
-     *
      * @var \DateTime
      */
     public $createdAt;
 
-
     public static function makeFromOrder(?Order $order)
     {
-        $model = new self;
+        $model = new self();
 
         if (!$order) {
             return $model;

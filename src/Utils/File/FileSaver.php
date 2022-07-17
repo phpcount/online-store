@@ -10,19 +10,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class FileSaver
 {
     /**
-     *
      * @var SluggerInterface
      */
     private $slugger;
 
     /**
-     *
      * @var FilesystemWorker
      */
     private $filesystemWorker;
 
     /**
-     *
      * @var string
      */
     private $uploadsTempDir;
@@ -34,15 +31,10 @@ class FileSaver
         $this->filesystemWorker = $filesystemWorker;
     }
 
-    /**
-     *
-     * @param UploadedFile $uploadedFile
-     * @return string|null
-     */
     public function saveUploadedFileIntoTemp(UploadedFile $uploadedFile): ?string
     {
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeFilename =$this->slugger->slug($originalFilename);
+        $safeFilename = $this->slugger->slug($originalFilename);
         $filename = sprintf('%s-%s.%s', $safeFilename, uniqid(), $uploadedFile->guessExtension());
 
         $this->filesystemWorker->createFolderIfItNotExists($this->uploadsTempDir);
@@ -51,10 +43,8 @@ class FileSaver
             $uploadedFile->move($this->uploadsTempDir, $filename);
         } catch (FileException $e) {
             return null;
-            
         }
 
         return $filename;
     }
-
 }

@@ -11,17 +11,14 @@ use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 class ResetUserPasswordEmailSender
 {
     /**
-     *
      * @var MailerSender
      */
     private $mailerSender;
 
     /**
-     *
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
-
 
     public function __construct(MailerSender $mailerSender, UrlGeneratorInterface $urlGenerator)
     {
@@ -36,9 +33,8 @@ class ResetUserPasswordEmailSender
         $context = [
             'resetToken' => $resetPasswordToken,
             'user' => $user,
-            'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL)
+            'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ];
-
 
         $mailerOptions = new MailerOptions();
         $mailerOptions
@@ -50,5 +46,4 @@ class ResetUserPasswordEmailSender
 
         $this->mailerSender->sendTemplatedEmail($mailerOptions);
     }
-
 }

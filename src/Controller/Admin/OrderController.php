@@ -24,13 +24,13 @@ class OrderController extends AbstractController
      */
     public function list(Request $request, OrderFormHandler $orderFormHandler): Response
     {
-        $model = new EditOrderModel;
+        $model = new EditOrderModel();
 
         $filterForm = $this->createForm(OrderFilterFormType::class, $model);
         $filterForm->handleRequest($request);
 
         $adminParams = $this->getParameter('admin');
-        $pagination = $orderFormHandler->processOrderFiltersForm($request, $filterForm , $adminParams['pages']['orders']['limit']);
+        $pagination = $orderFormHandler->processOrderFiltersForm($request, $filterForm, $adminParams['pages']['orders']['limit']);
 
         $filterForm = $filterForm->createView();
 
@@ -56,6 +56,7 @@ class OrderController extends AbstractController
             $orderFormHandler->processEditForm($order);
 
             $this->addFlash('success', 'Your changes were saved!');
+
             return $this->redirectToRoute('admin_order_edit', ['id' => $order->getId()]);
         }
 
@@ -65,7 +66,7 @@ class OrderController extends AbstractController
 
         return $this->render('admin/order/edit.html.twig', [
             'order' => $order,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 

@@ -7,15 +7,12 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class UserLoggedSocialNetEvent extends Event
 {
-
     /**
-     *
      * @var User
      */
     private $user;
 
     /**
-     *
      * @var string
      */
     private $plainPassword;
@@ -26,22 +23,13 @@ class UserLoggedSocialNetEvent extends Event
         $this->plainPassword = $plainPassword;
     }
 
-    /**
-     *
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     *
-     * @return string
-     */
     public function getPlainPassword(): string
     {
         return $this->plainPassword;
     }
-
 }

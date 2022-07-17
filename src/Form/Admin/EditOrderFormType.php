@@ -22,19 +22,18 @@ class EditOrderFormType extends AbstractType
                 'required' => true,
                 'choices' => array_flip(OrderStaticStorage::getOrderStatusChoices()),
                 'attr' => [
-                    'class' => 'form-control'
-                ]
-
+                    'class' => 'form-control',
+                ],
             ])
             ->add('isDeleted', CheckboxType::class, [
                 'label' => 'Is deleted',
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-check-input'
+                    'class' => 'form-check-input',
                 ],
                 'label_attr' => [
-                    'class' => 'form-check-label'
-                ]
+                    'class' => 'form-check-label',
+                ],
             ])
             ->add('owner', EntityType::class, [
                 'label' => 'User',
@@ -44,7 +43,7 @@ class EditOrderFormType extends AbstractType
                     return sprintf('#%s %s', $user->getId(), $user->getEmail());
                 },
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
             ])
         ;

@@ -5,18 +5,14 @@ namespace App\Utils\Manager;
 use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\OrderProduct;
-use App\Entity\Product;
 use App\Entity\StaticStorage\OrderStaticStorage;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
-use App\Utils\Manager\AbstractBaseManager;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class OrderManager extends AbstractBaseManager
 {
-
     /**
-     *
      * @var CartManager
      */
     private $cartManager;
@@ -28,19 +24,12 @@ class OrderManager extends AbstractBaseManager
         $this->cartManager = $cartManager;
     }
 
-    /**
-     *
-     * @return ObjectRepository
-     */
     public function getRepository(): ObjectRepository
     {
         return $this->em->getRepository(Order::class);
     }
 
     /**
-     *
-     * @param string $sessionId
-     * @param UserInterface $user
      * @return void
      */
     public function createOrderFromCartBySessionId(string $sessionId, UserInterface $user)
@@ -53,9 +42,6 @@ class OrderManager extends AbstractBaseManager
     }
 
     /**
-     *
-     * @param Cart $cart
-     * @param UserInterface $user
      * @return void
      */
     public function createOrderFromCart(Cart $cart, UserInterface $user)
@@ -84,11 +70,7 @@ class OrderManager extends AbstractBaseManager
         }
     }
 
-    
     /**
-     *
-     * @param Order $order
-     * @param UserInterface $user
      * @return void
      */
     private function startCreatingOrder(Order $order, UserInterface $user)
@@ -100,9 +82,6 @@ class OrderManager extends AbstractBaseManager
     }
 
     /**
-     *
-     * @param Cart $cart
-     * @param Order $order
      * @return void
      */
     private function finishCreatingOrder(Cart $cart, Order $order)
@@ -115,24 +94,20 @@ class OrderManager extends AbstractBaseManager
     {
         $orderTotalPrice = 0;
 
-        /** @var OrderProduct $orderProduct  */
+        /** @var OrderProduct $orderProduct */
         foreach ($order->getOrderProducts()->getValues() as $orderProduct) {
             $orderTotalPrice += $orderProduct->getQuantity() * $orderProduct->getPricePerOne();
         }
-        
+
         $order->setTotalPrice($orderTotalPrice);
     }
 
-
     /**
-     *
-     * @param Cart $cart
-     * @param Order $order
      * @return void
      */
     private function moveCartProductToOrderProduct(Cart $cart, Order $order)
     {
-        /** @var CartProduct $cartProduct  */
+        /** @var CartProduct $cartProduct */
         foreach ($cart->getCartProducts()->getValues() as $cartProduct) {
             $product = $cartProduct->getProduct();
 
@@ -148,5 +123,4 @@ class OrderManager extends AbstractBaseManager
             $this->em->persist($orderProduct);
         }
     }
-
 }

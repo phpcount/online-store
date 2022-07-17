@@ -135,5 +135,4 @@ class ResetPasswordController extends AbstractController
             'resetForm' => $form->createView(),
         ]);
     }
-
 }

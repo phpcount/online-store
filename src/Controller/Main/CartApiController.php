@@ -8,10 +8,8 @@ use App\Repository\CartProductRepository;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -37,11 +35,10 @@ class CartApiController extends AbstractController
         }
 
         $product = $productRepository->findOneBy(['uuid' => $productId]);
-        
-        
+
         $cart = $cartRepository->findOneBy(['sessionId' => $phpSessionId]);
         if (!$cart) {
-            $cart = new Cart;
+            $cart = new Cart();
             $cart->setSessionId($phpSessionId);
         }
 
@@ -53,7 +50,7 @@ class CartApiController extends AbstractController
                 ->setCart($cart)
                 ->setQuantity(1)
             ;
-            
+
             $cart->addCartProduct($cartProduct);
         } else {
             $newQuantity = $cartProduct->getQuantity() + 1;
@@ -64,13 +61,13 @@ class CartApiController extends AbstractController
         $em->persist($cart);
         $em->persist($cartProduct);
         $em->flush();
-    
+
         return new JsonResponse([
             'success' => false,
             'data' => [
                 'num' => 150,
                 'test' => 'qwerty',
-                'request' => $product
+                'request' => $product,
             ],
         ]);
     }

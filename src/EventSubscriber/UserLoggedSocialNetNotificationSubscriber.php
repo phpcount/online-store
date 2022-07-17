@@ -9,7 +9,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class UserLoggedSocialNetNotificationSubscriber implements EventSubscriberInterface
 {
     /**
-     *
      * @var UserLoggedSocialNetEmailSender
      */
     private $emailSender;
@@ -20,8 +19,6 @@ class UserLoggedSocialNetNotificationSubscriber implements EventSubscriberInterf
     }
 
     /**
-     *
-     * @param UserLoggedSocialNetEvent $event
      * @return void
      */
     public function onUserLoggedSocialNetEvent(UserLoggedSocialNetEvent $event)

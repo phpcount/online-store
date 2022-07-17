@@ -2,23 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource as Api;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ProductRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Uid\Uuid;
-use ApiPlatform\Core\Annotation\ApiResource as Api;
-use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @Api(
- *      collectionOperations={ 
+ *      collectionOperations={
  *          "get"={
  *                  "normalization_context"={"groups"="product:list"}
  *                },
@@ -49,7 +49,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "category": SearchFilter::STRATEGY_EXACT,
  *              "title": SearchFilter::STRATEGY_PARTIAL
  * })
- * 
+ *
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
@@ -58,16 +58,15 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @ApiProperty(identifier=false)
      * @Groups({"product:list", "product:item", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $id;
 
     /**
-     *
      * @ORM\Column(type="uuid")
-     * 
+     *
      * @ApiProperty(identifier=true)
      * @Groups({"product:list", "product:item", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
@@ -75,21 +74,21 @@ class Product
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     *
      * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
-     * 
+     *
      * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $quantity;
@@ -131,7 +130,7 @@ class Product
 
     /**
      * @ORM\OneToMany(targetEntity=ProductImage::class, mappedBy="product", cascade={"persist"}, orphanRemoval=true)
-     * 
+     *
      * @Groups({"cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $productImages;
@@ -144,7 +143,7 @@ class Product
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * 
+     *
      * @Groups({"product:list", "product:list:write", "product:item", "product:item:write", "order:item", "cart_product:list", "cart_product:item", "cart:list", "cart:item"})
      */
     private $category;

@@ -11,13 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FilterCartQueryExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-
     /**
-     *
-     * @param QueryBuilder $queryBuilder
-     * @param QueryNameGeneratorInterface $queryNameGenerator
-     * @param string $resourceClass
-     * @param string|null $operationName
      * @return void
      */
     public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
@@ -26,13 +20,6 @@ class FilterCartQueryExtension implements QueryCollectionExtensionInterface, Que
     }
 
     /**
-     *
-     * @param QueryBuilder $queryBuilder
-     * @param QueryNameGeneratorInterface $queryNameGenerator
-     * @param string $resourceClass
-     * @param array $identifiers
-     * @param string|null $operationName
-     * @param array $context
      * @return void
      */
     public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = [])
@@ -40,18 +27,12 @@ class FilterCartQueryExtension implements QueryCollectionExtensionInterface, Que
         $this->andWhere($queryBuilder, $resourceClass);
     }
 
-    /**
-     *
-     * @param QueryBuilder $queryBuilder
-     * @param string $resourceClass
-     * @return void
-     */
     private function andWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
         if (Cart::class !== $resourceClass) {
             return;
         }
-        
+
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $request = Request::createFromGlobals();
@@ -60,7 +41,5 @@ class FilterCartQueryExtension implements QueryCollectionExtensionInterface, Que
         $queryBuilder->andWhere(
             sprintf("%s.sessionId = '%s'", $rootAlias, $phpSessionId)
         );
-
     }
-
 }

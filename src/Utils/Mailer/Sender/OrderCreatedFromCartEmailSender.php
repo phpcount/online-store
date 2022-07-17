@@ -9,26 +9,21 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class OrderCreatedFromCartEmailSender
 {
-
     /**
-     *
      * @var MailerSender
      */
     private $mailerSender;
 
     /**
-     *
      * @var UrlGeneratorInterface
      */
     private $urlGenerator;
-    
+
     public function __construct(MailerSender $mailerSender, UrlGeneratorInterface $urlGenerator)
     {
         $this->mailerSender = $mailerSender;
         $this->urlGenerator = $urlGenerator;
     }
-
-
 
     public function sendEmailToClient(Order $order)
     {
@@ -44,7 +39,7 @@ class OrderCreatedFromCartEmailSender
                 'order' => $order,
                 'h1Title' => $subject,
                 'infoForClient' => 'Thank you for your purchase! Our manager will contact with you in 24 hours.',
-                'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL)
+                'profileUrl' => $this->urlGenerator->generate('main_profile_index', [], UrlGeneratorInterface::ABSOLUTE_URL),
             ])
         ;
 
@@ -62,7 +57,7 @@ class OrderCreatedFromCartEmailSender
             ->setHtmlTemplate('main/email/manager/created_order_from_cart.html.twig')
             ->setContext([
                 'order' => $order,
-                'h1Title' => $subject
+                'h1Title' => $subject,
             ])
         ;
 

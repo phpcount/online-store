@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
-use App\Form\DTO\EditCategoryModel;
 use App\Form\Admin\EditCategoryFormType;
+use App\Form\DTO\EditCategoryModel;
 use App\Form\Handler\CategoryFormHandler;
 use App\Repository\CategoryRepository;
 use App\Utils\Manager\CategoryManager;
@@ -35,14 +35,15 @@ class CategoryController extends AbstractController
     public function edit(Request $request, CategoryFormHandler $categoryFormHandler, Category $category = null): Response
     {
         $editCategoryModel = EditCategoryModel::makeFromCategory($category);
-       
+
         $form = $this->createForm(EditCategoryFormType::class, $editCategoryModel);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $category = $categoryFormHandler->processEditForm($editCategoryModel, $form);
+            $category = $categoryFormHandler->processEditForm($editCategoryModel);
 
             $this->addFlash('success', 'Your changes were saved!');
+
             return $this->redirectToRoute('admin_category_edit', ['id' => $category->getId()]);
         }
 
@@ -52,7 +53,7 @@ class CategoryController extends AbstractController
 
         return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -65,7 +66,7 @@ class CategoryController extends AbstractController
         $categoryManager->remove($category, true);
 
         $this->addFlash('info', sprintf('The category: "%s" was successfully deleted.', $title));
-        
+
         return $this->redirectToRoute('admin_category_list');
     }
 }

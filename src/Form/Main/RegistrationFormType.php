@@ -25,16 +25,16 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'autofocus' => 'autofocus',
-                    'placeholder' => 'email@example.com'
+                    'placeholder' => 'email@example.com',
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please, fill the field'
+                        'message' => 'Please, fill the field',
                     ]),
                     new ConstraintsEmail([
-                        'message' => 'Please, enter a valid mail'
-                    ])
-                ]
+                        'message' => 'Please, enter a valid mail',
+                    ]),
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'I agree to the <a href="#">privacy policy</a> *',
@@ -42,10 +42,10 @@ class RegistrationFormType extends AbstractType
                 'label_html' => true,
                 'mapped' => false,
                 'attr' => [
-                    'class' => 'custom-control-input'
+                    'class' => 'custom-control-input',
                 ],
                 'label_attr' => [
-                    'class' => 'custom-control-label'
+                    'class' => 'custom-control-label',
                 ],
                 'constraints' => [
                     new IsTrue([
@@ -62,7 +62,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'autocomplete' => 'new-password',
-                    'aria-autocomplete' => 'none'
+                    'aria-autocomplete' => 'none',
                 ],
                 'constraints' => [
                     new NotBlank([

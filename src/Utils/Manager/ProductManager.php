@@ -2,24 +2,18 @@
 
 namespace App\Utils\Manager;
 
+use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
-use App\Utils\Manager\AbstractBaseManager;
-use App\Entity\Product;
-
-
 
 class ProductManager extends AbstractBaseManager
 {
-
     /**
-     *
      * @var ProductImageManager
      */
     private $productImageManager;
 
     /**
-     *
      * @var string
      */
     private $productImagesDir;
@@ -31,28 +25,16 @@ class ProductManager extends AbstractBaseManager
         $this->productImagesDir = $productImagesDir;
     }
 
-
     public function getRepository(): ObjectRepository
     {
         return $this->em->getRepository(Product::class);
     }
 
-    /**
-     *
-     * @param Product $product
-     * @return string
-     */
     public function getProductImagesDir(Product $product): string
     {
         return sprintf('%s/%s', $this->productImagesDir, $product->getId());
     }
 
-    /**
-     *
-     * @param Product $product
-     * @param string|null $tempImageFilename
-     * @return Product
-     */
     public function updateProductImages(Product $product, string $tempImageFilename = null): Product
     {
         if (!$tempImageFilename) {

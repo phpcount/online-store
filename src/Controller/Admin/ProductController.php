@@ -3,8 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
-use App\Form\DTO\EditProductModel;
 use App\Form\Admin\EditProductFormType;
+use App\Form\DTO\EditProductModel;
 use App\Form\Handler\ProductFormHandler;
 use App\Repository\ProductRepository;
 use App\Utils\Manager\ProductManager;
@@ -24,6 +24,7 @@ class ProductController extends AbstractController
     public function list(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findBy(['isDeleted' => false], ['id' => 'DESC'], 50);
+
         return $this->render('admin/product/list.html.twig', compact('products'));
     }
 
@@ -39,7 +40,7 @@ class ProductController extends AbstractController
         }
 
         $editProductModel = EditProductModel::makeFromProduct($product);
-        
+
         $form = $this->createForm(EditProductFormType::class, $editProductModel);
         $form->handleRequest($request);
 
@@ -63,7 +64,7 @@ class ProductController extends AbstractController
         return $this->render('admin/product/edit.html.twig', [
             'product' => $product,
             'images' => $images,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 

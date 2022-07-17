@@ -7,11 +7,6 @@ use League\OAuth2\Client\Provider\GoogleUser;
 
 class UserFactory
 {
-    /**
-     *
-     * @param GoogleUser $googleUser
-     * @return User
-     */
     public static function creteUserFromGoogleAccount(GoogleUser $googleUser): User
     {
         $user = new User();

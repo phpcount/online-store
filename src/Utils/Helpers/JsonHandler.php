@@ -9,8 +9,8 @@ class JsonHandler
     public static function parseJson(Request $request, $toArray = false)
     {
         $content = $request->getContent();
-        
-        if (!$content || $request->getContentType() !== 'json') {
+
+        if (!$content || 'json' !== $request->getContentType()) {
             return null;
         }
 

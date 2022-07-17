@@ -24,6 +24,7 @@ class CartController extends AbstractController
         // return $this->render('main/cart/show.html.twig', compact('cart'));
         return $this->render('main/cart/show.html.twig');
     }
+
     /**
      * @Route("/create", name="create")
      */

@@ -5,7 +5,6 @@ namespace App\Messenger\Message\Command;
 class ResetUserPasswordEvent
 {
     /**
-     *
      * @var string
      */
     private $email;

@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource as Api;
 use App\Repository\OrderProductRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource as Api;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @Api(
- *      collectionOperations={ 
+ *      collectionOperations={
  *          "get"={
  *                  "normalization_context"={"groups"="order_product:list"}
  *                },
@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                 }
  *       },
  *      itemOperations={
-  *          "get"={
+ *          "get"={
  *                  "normalization_context"={"groups"="order_product:item"}
  *                },
  *          "delete"= {
@@ -35,7 +35,7 @@ class OrderProduct
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"order_product:list", "order:item"})
      */
     private $id;
@@ -49,21 +49,21 @@ class OrderProduct
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orderProducts")
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      * @Groups({"order:item"})
      */
     private $product;
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({"order:item"})
      */
     private $quantity;
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
-     * 
+     *
      * @Groups({"order:item"})
      */
     private $pricePerOne;

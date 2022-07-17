@@ -2,30 +2,26 @@
 
 namespace App\Messenger\MessageHandler\Event;
 
+use App\Entity\User;
 use App\Messenger\Message\Event\UserRegisteredEvent;
 use App\Security\Verifier\EmailVerifier;
+use App\Utils\Mailer\Sender\UserRegisteredEmailSender;
 use App\Utils\Manager\UserManager;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use App\Entity\User;
-use App\Utils\Mailer\Sender\UserRegisteredEmailSender;
 
 class UserRegisteredHandler implements MessageHandlerInterface
 {
-
     /**
-     *
      * @var EmailVerifier
      */
     private $emailVerifier;
 
     /**
-     *
      * @var UserManager
      */
     private $userManager;
 
     /**
-     *
      * @var UserRegisteredEmailSender
      */
     private $emailSender;
@@ -51,7 +47,5 @@ class UserRegisteredHandler implements MessageHandlerInterface
         $emailSignature = $this->emailVerifier->generateEmailSignature('main_verify_email', $user);
 
         $this->emailSender->sendEmailToClient($user, $emailSignature);
-
     }
-
 }

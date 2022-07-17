@@ -8,7 +8,6 @@ use App\Messenger\Message\Event\UserRegisteredEvent;
 use App\Repository\UserRepository;
 use App\Security\Verifier\EmailVerifier;
 use App\Utils\Manager\UserManager;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

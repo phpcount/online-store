@@ -2,11 +2,9 @@
 
 namespace App\Messenger\Message\Event;
 
-
 class UserRegisteredEvent
 {
     /**
-     *
      * @var string
      */
     private $userid;
@@ -17,7 +15,6 @@ class UserRegisteredEvent
     }
 
     /**
-     *
      * @return string
      */
     public function getUserId()

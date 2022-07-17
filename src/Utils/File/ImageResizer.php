@@ -8,7 +8,6 @@ use Imagine\Image\Box;
 class ImageResizer
 {
     /**
-     *
      * @var Imagine
      */
     private $imagine;
@@ -18,19 +17,12 @@ class ImageResizer
         $this->imagine = new Imagine();
     }
 
-    /**
-     *
-     * @param string $originalFileFolder
-     * @param string $originalFilename
-     * @param array $targetParams
-     * @return string
-     */
     public function resizeImageAndSave(string $originalFileFolder, string $originalFilename, array $targetParams): string
     {
-        $originalFilePath = $originalFileFolder . '/' . $originalFilename;
+        $originalFilePath = $originalFileFolder.'/'.$originalFilename;
 
         list($imageWidth, $imageHeight) = getimagesize($originalFilePath);
-        
+
         $ratio = $imageWidth / $imageHeight;
         $targetWidth = $targetParams['width'];
         $targetHeight = $targetParams['height'];
@@ -47,7 +39,7 @@ class ImageResizer
 
         $targetFolder = $targetParams['newFolder'];
         $targetFilename = $targetParams['newFilename'];
-        $targetFilePath  = sprintf('%s/%s', $targetFolder, $targetFilename);
+        $targetFilePath = sprintf('%s/%s', $targetFolder, $targetFilename);
 
         $imagineFile = $this->imagine->open($originalFilePath);
         $imagineFile
@@ -57,4 +49,3 @@ class ImageResizer
         return $targetFilename;
     }
 }
-

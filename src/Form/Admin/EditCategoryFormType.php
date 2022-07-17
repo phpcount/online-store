@@ -4,9 +4,9 @@ namespace App\Form\Admin;
 
 use App\Form\DTO\EditCategoryModel;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EditCategoryFormType extends AbstractType
@@ -18,11 +18,11 @@ class EditCategoryFormType extends AbstractType
                 'label' => 'Title',
                 'required' => true,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ],
                 'constraints' => [
-                    new NotBlank(null, 'Should be filled')
-                ]
+                    new NotBlank(null, 'Should be filled'),
+                ],
             ])
         ;
     }

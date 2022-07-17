@@ -72,7 +72,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $rolesKeys = array_flip($user->getRoles());
 
         if (
-            !$user 
+            !$user
             || !(isset($rolesKeys[UserStaticStorage::ROLE_ADMIN]) || isset($rolesKeys[UserStaticStorage::ROLE_SUPER_ADMIN]))
         ) {
             throw new UsernameNotFoundException('Email could not be found.');

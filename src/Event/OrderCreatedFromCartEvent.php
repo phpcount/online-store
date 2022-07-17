@@ -8,7 +8,6 @@ use Symfony\Contracts\EventDispatcher\Event;
 class OrderCreatedFromCartEvent extends Event
 {
     /**
-     *
      * @var Order
      */
     private $order;
@@ -22,5 +21,4 @@ class OrderCreatedFromCartEvent extends Event
     {
         return $this->order;
     }
-
 }

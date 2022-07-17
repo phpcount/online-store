@@ -11,37 +11,28 @@ use Symfony\Component\HttpFoundation\Request;
 
 class OrderFormHandler
 {
-
     /**
-     *
      * @var OrderManager
      */
     private $orderManager;
 
     /**
-     *
      * @var PaginatorInterface
      */
     private $paginator;
 
     /**
-     *
      * @var FilterBuilderUpdater
      */
     private $filterBuilderUpdater;
 
     public function __construct(OrderManager $orderManager, PaginatorInterface $paginator, FilterBuilderUpdater $filterBuilderUpdater)
     {
-       $this->orderManager = $orderManager;
-       $this->paginator = $paginator;
-       $this->filterBuilderUpdater = $filterBuilderUpdater;
+        $this->orderManager = $orderManager;
+        $this->paginator = $paginator;
+        $this->filterBuilderUpdater = $filterBuilderUpdater;
     }
 
-    /**
-     *
-     * @param Order $order
-     * @return Order
-     */
     public function processEditForm(Order $order): Order
     {
         $this->orderManager->calcTotalPriceForOrder($order);
@@ -53,12 +44,12 @@ class OrderFormHandler
 
     public function processOrderFiltersForm(Request $request, FormInterface $filterForm, $limit = 10)
     {
-        $alias = "o";
+        $alias = 'o';
         $qb = $this->orderManager->getRepository()
             ->createQueryBuilder($alias)
-            ->leftJoin("{$alias}.owner", "u")
+            ->leftJoin("{$alias}.owner", 'u')
             ->where("{$alias}.isDeleted = :isDeleted")
-            ->setParameter("isDeleted", false)
+            ->setParameter('isDeleted', false)
         ;
 
         if ($filterForm->isSubmitted()) {
@@ -70,7 +61,5 @@ class OrderFormHandler
             $request->query->getInt('page', 1),
             $limit
         );
-
-
     }
 }

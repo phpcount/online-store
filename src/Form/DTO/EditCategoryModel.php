@@ -8,13 +8,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class EditCategoryModel
 {
     /**
-     *
      * @var int
      */
     public $id;
-    
+
     /**
      * @Assert\NotBlank(message="Please enter a title")
+     *
      * @var string
      */
     public $title;
@@ -33,11 +33,6 @@ class EditCategoryModel
         return $model;
     }
 
-    /**
-     *
-     * @param Category $category
-     * @return Category
-     */
     public function makeCategoryFromModel(Category $category): Category
     {
         $category
@@ -46,5 +41,4 @@ class EditCategoryModel
 
         return $category;
     }
-
 }
