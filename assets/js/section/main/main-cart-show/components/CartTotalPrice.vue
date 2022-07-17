@@ -1,20 +1,18 @@
 <template>
-    <div class="mb-2">
-        <span>
-            Total: $<strong>{{ totalPrice }}</strong>
-        </span>
-    </div>
+  <div class="mb-2">
+    <span>
+      Total: $<strong>{{ totalPrice }}</strong>
+    </span>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-    computed: {
-        ...mapGetters("cart", ["totalPrice"])
-    }
-}
+  computed: {
+    ...mapGetters("cart", ["totalPrice"]),
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

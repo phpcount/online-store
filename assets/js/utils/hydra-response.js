@@ -1,57 +1,55 @@
 export function handlerHydraResponse(data) {
-    return new HydraResponse(data)
+  return new HydraResponse(data);
 }
 
 export class HydraResponse {
+  emptyModel() {
+    return {
+      "@context": null,
+      "@id": null,
+      "@type": "hydra:Collection",
+      [this.prefix + "totalItems"]: 0,
+      [this.prefix + "member"]: [],
+    };
+  }
 
-    emptyModel() {
-        return {
-            "@context": null,
-            "@id": null,
-            "@type": "hydra:Collection",
-            [this.prefix + "totalItems"]: 0,
-            [this.prefix + "member"]: []
-        };
+  constructor(data, prefix = "hydra") {
+    this.data = data;
+    this.prefix = prefix;
+
+    if (!this.data || !this.data["@context"]) {
+      console.error("No @context from hydra data");
+      // fixed data
+      this.data = this.emptyModel();
     }
+  }
 
-    constructor(data, prefix = 'hydra') {
-        this.data = data;
-        this.prefix = prefix;
+  get prefix() {
+    return this._prefix;
+  }
 
-        if (!this.data || !this.data["@context"]) {
-            console.error("No @context from hydra data");
-            // fixed data
-            this.data = this.emptyModel();
-        }
-    }
+  set prefix(value) {
+    this._prefix = value + ":";
+  }
 
-    get prefix() {
-        return this._prefix;
-    }
+  get data() {
+    return this._data;
+  }
 
-    set prefix(value) {
-        this._prefix = value + ':';
-    }
+  set data(value) {
+    this._data = value;
+  }
 
-    get data() {
-        return this._data;
-    }
+  getTotalItems() {
+    return this.data[this.prefix + "totalItems"];
+  }
 
-    set data(value) {
-        this._data = value;
-    }
+  getMember() {
+    const members = this.data[this.prefix + "member"];
+    return members;
+  }
 
-    getTotalItems() {
-        return this.data[this.prefix + "totalItems"];
-    }
-
-    getMember() {
-        const members = this.data[this.prefix + "member"];
-        return members;
-    }
-    
-    isEmpty() {
-        return !this.getTotalItems() || this.getMember().length;
-    }
-
+  isEmpty() {
+    return !this.getTotalItems() || this.getMember().length;
+  }
 }
