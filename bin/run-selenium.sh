@@ -1,1 +1,1 @@
-java -jar selenium-server-4.3.0.jar hub
+java -jar selenium-server-4.3.0.jar standalone
