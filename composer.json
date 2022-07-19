@@ -62,6 +62,7 @@
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.7.0",
         "dbrekelmans/bdi": "^1.0",
+        "deployer/deployer": "^6.8",
         "friendsofphp/php-cs-fixer": "^3.2.1",
         "hautelook/alice-bundle": "^2.0",
         "phpstan/phpstan": "^1.8",

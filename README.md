@@ -275,3 +275,18 @@ sudo chown -R 1001:1002 /home/developer/.npm
 </br>
 
 2. npm run build
+</br>
+
+### Install deployer on server
+
+[Download Deployer](https://deployer.org/download)
+
+<code>
+
+curl -LO https://deployer.org/deployer.phar
+
+mv deployer.phar /usr/local/bin/dep
+
+chmod +x /usr/local/bin/dep
+
+</code>
