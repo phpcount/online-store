@@ -26,7 +26,7 @@ add('shared_files', ['.env.local']);
 add('shared_dirs', ['var/log', 'public/uploads']);
 
 // Writable dirs by web server
-add('writable_dirs', ['var', 'public/uploads']);
+add('writable_dirs', ['var/log', 'var/cache', 'public/uploads']);
 set('allow_anonymous_stats', false);
 
 // Hosts
@@ -64,6 +64,7 @@ task('deploy:build:assets', function () {
 
 });
 
+// for linux
 // task('deploy:build_local_assets', function () {
 //     upload('./public/bundles', '{{release_path}}/public/build/.');
 //     upload('./public/bundles', '{{release_path}}/public/.');
