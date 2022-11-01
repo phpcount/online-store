@@ -73,7 +73,7 @@ class AuthLoginControllerTest extends BasePantherTestCase
 
         $this->assertSame(self::$baseUri . '/en/profile', $client->getCurrentURL());
 
-        $this->assertPageTitleContains('My profile - RankedChoice');
+        $this->assertPageTitleContains('My profile - OnlineStore');
 
         $this->assertSelectorTextContains('#page_header_title', 'Welcome, to your profile!');
 
