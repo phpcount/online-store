@@ -17,15 +17,14 @@ class ProductImageController extends AbstractController
     /**
      * @Route("/delete/{id}", methods="GET|DELETE", name="delete")
      */
-    public function delete(ProductImage $productImage, ProductManager $productManager, ProductImageManager $productImageManager): Response
+    public function delete(ProductImage $productImage, ProductImageManager $productImageManager): Response
     {
         if (!$productImage) {
             return $this->redirectToRoute('admin_product_list');
         }
 
+        $productImageManager->removeImageFromProduct($productImage);
         $product = $productImage->getProduct();
-        $productImageDir = $productManager->getProductImagesDir($product);
-        $productImageManager->removeImageFromProduct($productImage, $productImageDir);
 
         return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
     }

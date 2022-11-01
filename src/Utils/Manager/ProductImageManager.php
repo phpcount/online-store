@@ -2,6 +2,7 @@
 
 namespace App\Utils\Manager;
 
+use App\Entity\Product;
 use App\Entity\ProductImage;
 use App\Utils\File\ImageResizer;
 use App\Utils\Filesystem\FilesystemWorker;
@@ -33,17 +34,23 @@ class ProductImageManager extends AbstractBaseManager
         $this->uploadsTempDir = $uploadsTempDir;
     }
 
+    public function getProductImagesDir(Product $product): string
+    {
+        return sprintf('%s/%s', $this->productImagesDir, $product->getId());
+    }
+
     public function getRepository(): ObjectRepository
     {
         return $this->em->getRepository(ProductImage::class);
     }
 
-    public function saveImageForProduct(string $productDir, string $tempImageFileName = null): ?ProductImage
+    public function saveImageForProduct(Product $product, string $tempImageFileName = null): ?ProductImage
     {
         if (!$tempImageFileName) {
             return null;
         }
 
+        $productDir = $this->getProductImagesDir($product);
         $this->filesystemWorker->createFolderIfItNotExists($productDir);
 
         $filenameId = uniqid();
@@ -79,8 +86,11 @@ class ProductImageManager extends AbstractBaseManager
         return $productImage;
     }
 
-    public function removeImageFromProduct(ProductImage $productImage, string $productDir)
+    public function removeImageFromProduct(ProductImage $productImage)
     {
+        $product = $productImage->getProduct();
+        $productDir = $this->getProductImagesDir($product);
+
         $smallFilePath = $productDir.'/'.$productImage->getFilenameSmall();
         $middleFilePath = $productDir.'/'.$productImage->getFilenameMiddle();
         $bigFilePath = $productDir.'/'.$productImage->getFilenameBig();
@@ -90,7 +100,7 @@ class ProductImageManager extends AbstractBaseManager
             ->remove($middleFilePath)
             ->remove($bigFilePath);
 
-        $productImage->getProduct()->removeProductImage($productImage);
+        $product->removeProductImage($productImage);
         $this->em->flush();
     }
 }
