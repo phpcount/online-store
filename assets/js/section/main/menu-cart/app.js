@@ -8,9 +8,6 @@ const vueMenuCartInstance = new Vue({
   render: (h) => h(App),
 });
 
-// setInterval(() => {
-//     vueMenuCartInstance.$store.dispatch('cart/getCart');
-// }, 1000);
 
 window.vueMenuCartInstance = {
   addCartProduct: (productData) =>
