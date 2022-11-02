@@ -61,7 +61,7 @@
     top: 50% !important;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, .4);
+    background: rgba(0, 0, 0, .57);
     -webkit-clip-path: polygon(12% 8%, 95% 0, 87% 88%, 0% 100%);
     clip-path: polygon(12% 8%, 95% 0, 87% 88%, 0% 100%);
     border: 3px solid #ff59bd!important;
