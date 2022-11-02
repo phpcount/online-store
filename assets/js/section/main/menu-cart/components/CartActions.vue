@@ -8,14 +8,15 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useCartStore } from '../store/cart'
 
 export default {
   computed: {
-    ...mapState("cart", ["staticStore"]),
+    ...mapState(useCartStore, ["staticStore"]),
   },
   methods: {
-    ...mapActions("cart", ["cleanCart"]),
+    ...mapActions(useCartStore, ["cleanCart"]),
   },
 };
 </script>

@@ -7,10 +7,11 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "pinia";
+import { useCartStore } from '../store/cart'
 export default {
   computed: {
-    ...mapGetters("cart", ["totalPrice"]),
+    ...mapState(useCartStore, ["totalPrice"]),
   },
 };
 </script>

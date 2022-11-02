@@ -8,10 +8,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "pinia";
+import { useProductsStore } from '../store/products'
 export default {
   computed: {
-    ...mapState("products", ["orderProducts"]),
+    ...mapState(useProductsStore, ["orderProducts"]),
     totalPrice() {
       return this.orderProducts.reduce(
         (prev, current) => prev + current.quantity * current.pricePerOne,

@@ -5,10 +5,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "pinia";
+import { useCartStore } from '../store/cart'
 export default {
   computed: {
-    ...mapState("cart", ["alert"]),
+    ...mapState(useCartStore, ["alert"]),
     alertClass() {
       return `alert alert-${this.alert.type}`;
     },

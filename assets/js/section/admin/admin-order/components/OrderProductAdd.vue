@@ -66,7 +66,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useProductsStore } from '../store/products'
+
 import { unbindProperty } from "../../../../utils/helper";
 import { getUrlViewProduct } from "../../../../utils/url-generator";
 import { getProductInformativeTitle } from "../../../../utils/title-formatter";
@@ -85,8 +87,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("products", ["staticStore", "categories", "categoryProducts"]),
-    ...mapGetters("products", ["freeCategoryProducts"]),
+    ...mapState(useProductsStore, ["staticStore", "categories", "categoryProducts", "freeCategoryProducts"]),
 
     showAfterSelectCategory() {
       return this.form.categoryId;
@@ -94,16 +95,30 @@ export default {
     showAfterSelectProduct() {
       return this.showAfterSelectCategory && this.form.productId;
     },
+    getSelectedProduct() {
+      if (!this.form.productId) {
+        return undefined;
+      }
+
+      if (this.selectedProduct.uuid === this.form.productId) {
+        return this.selectedProduct;
+      }
+
+      this.selectedProduct = this.freeCategoryProducts.find(
+        item => item.uuid === this.form.productId
+      );
+
+      return this.selectedProduct;
+    },
     productQuantityMax() {
-      return parseInt(this.getSelectedProduct().quantity) ?? "";
+      return parseInt(this.getSelectedProduct.quantity) ?? "";
     },
     productPriceMax() {
-      return this.getSelectedProduct().price ?? "";
+      return this.getSelectedProduct.price ?? "";
     },
   },
   methods: {
-    ...mapActions("products", ["getProductsByCategory", "addNewOrderProduct"]),
-    ...mapMutations("products", ["setNewProductInfo"]),
+    ...mapActions(useProductsStore, ["getProductsByCategory", "addNewOrderProduct", "setNewProductInfo"]),
     productTitle(product) {
       return getProductInformativeTitle(product);
     },
@@ -114,7 +129,7 @@ export default {
     viewDetails() {
       const url = getUrlViewProduct(
         this.staticStore.url.viewProduct,
-        this.form.productId
+        this.getSelectedProduct.id
       );
       window.open(url, "_blank").focus();
     },
@@ -125,22 +140,7 @@ export default {
     },
     resetFormData() {
       this.form = unbindProperty({});
-    },
-    getSelectedProduct() {
-      if (!this.form.productId) {
-        return;
-      }
-
-      if (this.selectedProduct.uuid === this.form.productId) {
-        return this.selectedProduct;
-      }
-
-      this.selectedProduct = this.freeCategoryProducts.find(
-        (item) => item.uuid === this.form.productId
-      );
-
-      return this.selectedProduct;
-    },
+    }
   },
 };
 </script>

@@ -1,15 +1,14 @@
-import Vue from "vue";
+import { createApp } from "vue";
+import { createPinia } from 'pinia'
 import App from "./App.vue";
-import store from "./store";
+import { useCartStore } from "./store/cart"
 
-const vueMenuCartInstance = new Vue({
-  el: "#app-menu-cart",
-  store,
-  render: (h) => h(App),
-});
+const pinia = createPinia()
+const vueMenuCartInstance = createApp(App)
+  .use(pinia)
+  .mount("#app-menu-cart");
 
 
 window.vueMenuCartInstance = {
-  addCartProduct: (productData) =>
-    vueMenuCartInstance.$store.dispatch("cart/addCartProduct", productData),
+  addCartProduct: (productData) => useCartStore().addCartProduct(productData)
 };

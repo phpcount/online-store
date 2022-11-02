@@ -16,7 +16,9 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useCartStore } from './store/cart'
+
 import CartTotalPrice from "./components/CartTotalPrice.vue";
 import CartActions from "./components/CartActions.vue";
 import CartProductList from "./components/CartProductList.vue";
@@ -27,7 +29,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapState("cart", ["staticStore", "cart"]),
+    ...mapState(useCartStore, ["staticStore", "cart"]),
     countCartProducts() {
       if (!this.cart.cartProducts) {
         return 0;
@@ -40,7 +42,7 @@ export default {
     this.getCart();
   },
   methods: {
-    ...mapActions("cart", ["getCart"]),
+    ...mapActions(useCartStore, ["getCart"]),
   },
 };
 </script>

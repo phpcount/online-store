@@ -13,7 +13,9 @@
   </div>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useProductsStore } from './store/products'
+
 import OrderProductAdd from "./components/OrderProductAdd.vue";
 import OrderProductItem from "./components/OrderProductItem.vue";
 import OrderTotalPriceBlock from "./components/OrderTotalPriceBlock.vue";
@@ -21,7 +23,7 @@ import OrderTotalPriceBlock from "./components/OrderTotalPriceBlock.vue";
 export default {
   components: { OrderProductItem, OrderProductAdd, OrderTotalPriceBlock },
   computed: {
-    ...mapState("products", ["orderProducts"]),
+    ...mapState(useProductsStore, ["orderProducts"]),
   },
   created() {
     // console.log('create', ORDER_PRODUCTS);
@@ -34,7 +36,7 @@ export default {
     this.getOrderProducts();
   },
   methods: {
-    ...mapActions("products", ["getCategories", "getOrderProducts"]),
+    ...mapActions(useProductsStore, ["getCategories", "getOrderProducts"]),
   },
 };
 </script>

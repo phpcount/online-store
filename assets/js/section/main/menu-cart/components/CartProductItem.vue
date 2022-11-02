@@ -34,7 +34,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useCartStore } from '../store/cart'
 import {
   concatUrlByParams,
   getUrlViewProduct,
@@ -48,7 +49,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("cart", ["staticStore"]),
+    ...mapState(useCartStore, ["staticStore"]),
     urlShowProduct() {
       return getUrlViewProduct(
         this.staticStore.url.viewProduct,
@@ -64,7 +65,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("cart", ["deleteCartProduct"]),
+    ...mapActions(useCartStore, ["deleteCartProduct"]),
     removeCartProduct() {
       this.deleteCartProduct(this.cartProduct.id);
     },

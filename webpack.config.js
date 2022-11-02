@@ -40,11 +40,11 @@ Encore
     .enableSingleRuntimeChunk()
 
     .copyFiles([
-        { 
+        {
             from: './assets/js/section/services/',
             to: 'services/[path][name].[hash:8].[ext]'
         },
-        { 
+        {
             from: './assets/images',
             to: 'images/[path][name].[hash:8].[ext]'
         }
@@ -84,6 +84,11 @@ Encore
 
     // Vue
     .enableVueLoader()
+    .configureDefinePlugin((options) => {
+        options.__VUE_OPTIONS_API__ = true
+        options.__VUE_PROD_DEVTOOLS__ = false
+        options.__VUE_DEVTOOLS_TOAST__ = false
+    })
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher

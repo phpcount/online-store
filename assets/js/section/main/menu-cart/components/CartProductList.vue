@@ -9,13 +9,14 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "pinia";
+import { useCartStore } from '../store/cart'
 import CartProductItem from "./CartProductItem.vue";
 
 export default {
   components: { CartProductItem },
   computed: {
-    ...mapState("cart", ["cart"]),
+    ...mapState(useCartStore, ["cart"]),
   },
 };
 </script>

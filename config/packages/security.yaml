@@ -15,7 +15,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin_secured_area:
-            pattern: ^/admin
+            pattern: ^/(admin|api/v1/)
             anonymous: true
             lazy: true
             provider: app_user_provider

@@ -24,7 +24,9 @@
   </div>
 </template>
 <script>
-import { mapActions, mapMutations, mapState } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useCartStore } from './store/cart'
+
 import Alert from "./components/Alert.vue";
 import CartProductList from "./components/CartProductList";
 import CartTotalPrice from "./components/CartTotalPrice";
@@ -37,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("cart", ["cart", "isSentForm"]),
+    ...mapState(useCartStore, ["cart", "isSentForm"]),
     showCartContent() {
       return !this.isSentForm && Object.keys(this.cart).length;
     },
@@ -46,18 +48,14 @@ export default {
     this.isLoadedCart = false;
     this.getCart((isSuccess) => {
       if (isSuccess) {
-        this.setAlert({
-          type: "info",
-          message: "You can see your cart.",
-        });
+        this.setAlert("info", "You can see your cart.");
       }
 
       this.isLoadedCart = true;
     });
   },
   methods: {
-    ...mapActions("cart", ["getCart", "createOrder"]),
-    ...mapMutations("cart", ["setAlert"]),
+    ...mapActions(useCartStore, ["getCart", "createOrder", "setAlert"]),
     makeOrder() {
       this.createOrder();
     },

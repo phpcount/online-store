@@ -23,7 +23,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapActions, mapState } from "pinia";
+import { useProductsStore } from '../store/products'
 import { getUrlViewProduct } from "../../../../utils/url-generator";
 import { getProductInformativeTitle } from "../../../../utils/title-formatter";
 
@@ -40,7 +41,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("products", ["staticStore"]),
+    ...mapState(useProductsStore, ["staticStore"]),
     rowNumber() {
       return this.index + 1;
     },
@@ -53,7 +54,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("products", ["removeOrderProduct"]),
+    ...mapActions(useProductsStore, ["removeOrderProduct"]),
     viewDetails() {
       const url = getUrlViewProduct(
         this.staticStore.url.viewProduct,
